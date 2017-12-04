@@ -36,6 +36,15 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
     return(ww)
   }
 
+  getNextInteger = function(x) {
+    ceiling(x + 0.5)
+  }
+
+  makeIntegerWeights = function(ww, adj.mat) {
+    ww[adj.mat] = getNextInteger(ww[adj.mat])
+    return(ww)
+  }
+
   n.nodes = graph$n.nodes
   if (n.nodes == 0)
     stopf("addWeights: first place nodes/coordinates and add edges.")
@@ -50,6 +59,8 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
   if (!is.null(weights)) {
     if (symmetric)
       weights = makeSymmetricWeights(weights)
+    if (to.int)
+      weights = makeIntegerWeights(weights, graph$adj.mat)
     graph$weights = c(graph$weights, list(weights))
     graph$n.weights = graph$n.weights + 1L
     graph$weight.types = c(graph$weight.types, "manual")
@@ -57,9 +68,10 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
   } else {
     generator.res = do.call(generator, c(list(graph = graph), list(...)))
     weights = generator.res$weights
-    if (symmetric) {
+    if (symmetric)
       weights = lapply(weights, makeSymmetricWeights)
-    }
+    if (to.int)
+      weights = lapply(weights, makeIntegerWeights, graph$adj.mat)
     graph$weights = c(graph$weights, weights)
     graph$n.weights = graph$n.weights + length(weights)
     graph$weight.types = c(graph$weight.types, generator.res$generator)
