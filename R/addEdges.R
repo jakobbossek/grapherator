@@ -76,6 +76,7 @@ addEdges = function(graph, generator, type = "all", ...) { # nocov start
     edge.type = res$generator
     graph$adj.mat = adj.mat | res$adj.mat
   }
+  graph$n.edges = sum(graph$adj.mat[upper.tri(graph$adj.mat)])
   graph$edge.types = c(graph$edge.types, edge.type)
   return(graph)
 } # nocov end

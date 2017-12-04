@@ -29,6 +29,7 @@ graph = function(lower, upper) {
     upper = upper,
     n.clusters = 0L,
     n.nodes = 0L,
+    n.edges = 0L,
     n.weights = 0L,
     node.types = character(0L),
     edge.types = character(0L),
@@ -41,10 +42,12 @@ graph = function(lower, upper) {
 
 #' @export
 print.grapherator = function(x, ...) {
-  catf("GRAPH")
-  catf("Number of nodes: %i", x$n.nodes)
-  if (x$n.clusters > 0L)
-    catf("Number of clusters: %i", x$n.clusters)
+  catf("GRAPHERATOR GRAPH")
+  catf("#nodes:            %i", getNumberOfNodes(x))
+  catf("#edges:            %i", getNumberOfEdges(x))
+  n.clusters = getNumberOfClusters(x)
+  if (n.clusters > 0L)
+    catf("#clusters:         %i", n.clusters)
   n.weights = length(x$weights)
-  catf("Weights per edge: %i (%s)", n.weights, BBmisc::collapse(x$weight.types))
+  catf("#weights per edge: %i (%s)", getNumberOfWeights(x), BBmisc::collapse(x$weight.types))
 }
