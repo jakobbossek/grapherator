@@ -45,8 +45,13 @@ addEdges = function(graph, generator, type = "all", ...) { # nocov start
     for (cluster in clusters) {
       # get all points in that cluster
       idx.cluster = which(graph$membership == cluster)
+
+      # generate temporary graph
+      graph2 = graph
+      graph2$coordinates = graph$coordinates[idx.cluster, , drop = FALSE]
+      graph2$n.nodes = length(idx.cluster)
       # apply addEdge method to subset of cluster points
-      res.adj.mat = do.call(generator, c(list(n = length(idx.cluster), coordinates = graph$coordinates[idx.cluster, , drop = FALSE]), list(...)))
+      res.adj.mat = do.call(generator, c(list(graph = graph2), list(...)))
       cl.adj.mat = res.adj.mat$adj.mat
       edge.type = res.adj.mat$generator
       # update adjacency matrix
@@ -56,13 +61,19 @@ addEdges = function(graph, generator, type = "all", ...) { # nocov start
     edge.type = sprintf("CL%s", edge.type)
   } else if (type == "intercluster") {
     idx.centers = graph$center.ids
-    res.centers = do.call(generator, c(list(n = length(idx.centers), coordinates = graph$center.coordinates), list(...)))
+
+    # generate temporary graph
+    graph2 = graph
+    graph2$coordinates = graph$center.coordinates
+    graph2$n.nodes = length(idx.centers)
+
+    res.centers = do.call(generator, c(list(graph = graph2), list(...)))
     centers.adj.mat = res.centers$adj.mat
     edge.type = res.centers$generator
     adj.mat[idx.centers, idx.centers] = adj.mat[idx.centers, idx.centers] | centers.adj.mat
     graph$adj.mat = adj.mat
   } else {
-    res = do.call(generator, c(list(n = graph$n.nodes, coordinates = graph$coordinates), list(...)))
+    res = do.call(generator, c(list(graph = graph), list(...)))
     edge.type = res$generator
     graph$adj.mat = adj.mat | res$adj.mat
   }

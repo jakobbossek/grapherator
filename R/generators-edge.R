@@ -1,12 +1,71 @@
-# complete edge generator
-addEdgesComplete = function(n, coordinates, ...) {
+#' @title Edge generators.
+#'
+#' @description Function to add edges into a graph. The following methods
+#' are implemented so far:
+#' \describe{
+#'   \item{\code{addEdgesComplete}}{Generates a simple complete graph. I.e., an edge
+#'   exists between each two nodes. However, no self-loops or multi-edges are included.}
+#'   \item{\code{addEdgesGrid}}{Only usefull if nodes are generated via \code{\link{addNodesGrid}}.
+#'   This method generates a Manhattan-like street network.}
+#'   \item{\code{addEdgesOnion}}{This method determines the nodes on the convex hull
+#'   of the node cloud in the euclidean plane and adds edges between neighbour nodes.
+#'   Ignoring all nodes on the hull, this process is repeated iteratively resulting in an
+#'   onion like peeling topololgy. Note that the graph is not connected! In order to
+#'   ensure connectivity, another edge generator must be applied in addition, e.g.,
+#'   \code{addEdgesSpanningTree}.}
+#'   \item{\code{addEdgesDelauney}}{Edges are determined by means of a Delauney triangulation
+#'   of the node coordinates in the Euclidean plane.}
+#'   \item{\code{addEdgesWaxman}}{Edges are generated using the Waxman-model, i.e., the
+#'   probability \eqn{p_{ij}} for the edge \eqn{(i, j)} is given by
+#'   \deqn{p_{ij} = \alpha e^{-\beta d_{ij}}},
+#'   where \eqn{\alpha, \beta \geq 0} are control parameters and \eqn{d_{ij}} is the
+#'   Euclidean distance of the nodes \eqn{i} and \eqn{j}.}
+#'   \item{\code{addEdgesSpanningTree}}{A minimum spanning tree is computed based on
+#'   a complete random weight matrix. All edges of the spanning tree are added. If \code{runs}
+#'   is greater 1, the process is repeated for \code{runs}. However, already added edges are
+#'   ignored in subsequent runs.
+#'   This method is particularly useful to assist probablistic methods, e.g., Waxman model,
+#'   in order to generate connected graphs.}
+#' }
+#'
+#' @note These functions are not meant to be called directly. Instead, they need
+#' to be assigned to the \code{generator} argument of \code{\link{addEdges}}.
+#'
+#' @template arg_grapherator
+#' @param alpha [\code{numeric(1)}]\cr
+#'   Positive number indicating the average degree of nodes in the Waxman model.
+#'   Default is 0.5.
+#' @param beta [\code{numeric(1)}]\cr
+#'   Positive number indicating the scale between short and long edges in the Waxman model.
+#'   Default is 0.5.
+#' @param runs [\code{integer(1)}]\cr
+#'   Number of runs to perform by \code{\link{addEdgesSpanningTree}}.
+#'   Default is \code{1}.
+#' @param ... [any]\cr
+#'   Not used at the moment.
+#' @return [\code{list}] List with components:
+#' \describe{
+#'   \item{adj.mat \code{matrix}}{Adjacency matrix.}
+#'   \item{generator [\code{character(1)}]}{String description of the generator used.}
+#' }
+#' @export
+#' @rdname edgeGenerators
+#' @name edgeGenerators
+addEdgesComplete = function(graph, ...) {
+  assertClass(graph, "grapherator")
+  n = graph$n.nodes
   adj.mat = matrix(TRUE, nrow = n, ncol = n)
   diag(adj.mat) = FALSE
   return(list(adj.mat = adj.mat, generator = "CEG"))
 }
 
-# Edge generator for grid layout
-addEdgesGrid = function(n, coordinates, ...) {
+#' @export
+#' @rdname edgeGenerators
+addEdgesGrid = function(graph, ...) {
+  assertClass(graph, "grapherator")
+  coordinates = graph$coordinates
+  n = graph$n.nodes
+
   # get euclidean coordinates
   euc.dists = as.matrix(dist(coordinates))
 
@@ -20,8 +79,11 @@ addEdgesGrid = function(n, coordinates, ...) {
   return(list(adj.mat = adj.mat, generator = "GEG"))
 }
 
-# Edge generator by repeated convex hull computation.
-addEdgesOnion = function(n, coordinates, ...) {
+#' @export
+#' @rdname edgeGenerators
+addEdgesOnion = function(graph, ...) {
+  n = graph$n.nodes
+  coordinates = graph$coordinates
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
 
   coordinates2 = coordinates
@@ -52,8 +114,11 @@ addEdgesOnion = function(n, coordinates, ...) {
   return(list(adj.mat = adj.mat, generator = "OEG"))
 }
 
-# Edge generator based on Delauney triangulation.
-addEdgesDelauney = function(n, coordinates, ...) {
+#' @export
+#' @rdname edgeGenerators
+addEdgesDelauney = function(graph, ...) {
+  n = graph$n.nodes
+  coordinates = graph$coordinates
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
   requirePackages("deldir", why = "mcMST:addEdges")
   # compute triangulation
@@ -66,13 +131,16 @@ addEdgesDelauney = function(n, coordinates, ...) {
   return(list(adj.mat = adj.mat, generator = "DEG"))
 }
 
-# Waxman's probablistic edge generator.
-#
-# @param alpha [\code{numeric(1)}]\cr
-#   Average degree of nodes.
-# @param beta [\code{numeric(1)}]\cr
-#   Scale between short and long edges.
-addEdgesWaxman = function(n, coordinates, alpha = 0.5, beta = 0.5, ...) {
+#' @export
+#' @rdname edgeGenerators
+addEdgesWaxman = function(graph, alpha = 0.5, beta = 0.5, ...) {
+  assertClass(graph, "grapherator")
+  assertNumber(alpha, lower = 0)
+  assertNumber(beta, lower = 0)
+
+  coordinates = graph$coordinates
+  n = graph$n.nodes
+
   # get euclidean distances (only necessary for probability computation)
   euc.dists = as.matrix(dist(coordinates))
   # maximal euclidean distance
@@ -90,7 +158,15 @@ addEdgesWaxman = function(n, coordinates, alpha = 0.5, beta = 0.5, ...) {
   return(list(adj.mat = adj.mat, generator = "WEG"))
 }
 
-addEdgesSpanningTree = function(n, coordinates, runs = 1L, ...) {
+#' @export
+#' @rdname edgeGenerators
+addEdgesSpanningTree = function(graph, runs = 1L, ...) {
+  assertClass(graph, "grapherator")
+  runs = asInt(runs, lower = 1L)
+
+  coordinates = graph$coordinates
+  n = graph$n.nodes
+
   # compute a spanning tree
   dist.mat = as.matrix(dist(coordinates))
 
