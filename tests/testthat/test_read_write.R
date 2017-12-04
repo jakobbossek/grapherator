@@ -2,7 +2,7 @@ context("{write,read}GP")
 
 test_that("writeGP and readGP work well", {
   # test instance
-  g = mcGP(lower = c(0, 0), upper = c(100, 100))
+  g = graph(lower = c(0, 0), upper = c(100, 100))
   g = addCoordinates(g, n = 3, generator = coordUniform)
   g = addCoordinates(g, n = 9, by.centers = TRUE, generator = coordUniform, lower = c(0, 0), upper = c(10, 10))
   g = addEdges(g, method = addEdgesDelauney, type = "intracluster")

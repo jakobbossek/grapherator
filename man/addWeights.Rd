@@ -8,7 +8,7 @@ addWeights(graph, method = "euclidean", weights = NULL, weight.fun = NULL,
   symmetric = TRUE, to.int = FALSE, rho = 0.5, ...)
 }
 \arguments{
-\item{graph}{[\code{mcGP}]\cr
+\item{graph}{[\code{grapherator}]\cr
 Multi-objective graph problem.}
 
 \item{method}{[\code{character(1)}]\cr
@@ -45,7 +45,7 @@ Additional arguments passed down to \code{weight.fun} or \code{\link[stats]{dist
 documentation of argument \code{method} for details.}
 }
 \value{
-[\code{mcGP}] Multi-objective graph problem.
+[\code{grapherator}] Multi-objective graph problem.
 }
 \description{
 \code{addWeights} allows to generate edge weights for a multi-objective
@@ -55,5 +55,5 @@ Alternatively, all kinds of random weights can be generated.
 }
 \seealso{
 Other graph generators: \code{\link{addCoordinates}},
-  \code{\link{addEdges}}, \code{\link{mcGP}}
+  \code{\link{addEdges}}, \code{\link{graph}}
 }

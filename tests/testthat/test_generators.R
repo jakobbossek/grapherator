@@ -4,12 +4,12 @@ test_that("graph generation: simple 2o graph", {
   # here we generate a complex biobjective graph problem
   # with both euclidean and random weights
 
-  g = mcGP(lower = 0, upper = 100)
+  g = graph(lower = 0, upper = 100)
   g = addCoordinates(g, n = 50L, generator = coordUniform)
   g = addWeights(g, method = "euclidean", symmetric = TRUE)
   g = addWeights(g, method = "random", weight.fun = runif, symmetric = TRUE)
 
-  expect_class(g, "mcGP")
+  expect_class(g, "grapherator")
   expect_true(g$n.nodes == 50L)
   expect_true(g$n.clusters == 0L)
   expect_true(g$n.weights == 2L)
@@ -23,7 +23,7 @@ test_that("graph generation: simple 2o graph", {
 })
 
 test_that("graph generation: complex clustered graph", {
-  g = mcGP(lower = 0, upper = 100)
+  g = graph(lower = 0, upper = 100)
   g = addCoordinates(g, n = 3L, generator = coordLHS)
   g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = coordUniform, lower = c(0, 0), upper = c(1, 1))
   g = addCoordinates(g, n = 100L, generator = coordGrid)
@@ -38,7 +38,7 @@ test_that("graph generation: complex clustered graph", {
     sample(c(1, -10), n, replace = TRUE) * rexp(n, rate = 0.1) * 1:n
   })
 
-  expect_class(g, "mcGP")
+  expect_class(g, "grapherator")
   expect_true(g$n.nodes == 130L)
   expect_true(g$n.clusters == 3L)
   expect_true(g$n.weights == 3L)
@@ -51,7 +51,7 @@ test_that("graph generation: complex clustered graph", {
 })
 
 test_that("graph generation: manual passing of coordinates weights works", {
-  g = mcGP(lower = 0, upper = 10)
+  g = graph(lower = 0, upper = 10)
   center.coordinates = matrix(c(1, 2, 2, 5, 8, 3), byrow = TRUE, ncol = 2L)
   g = addCoordinates(g, coordinates = center.coordinates)
   g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = coordGrid, lower = c(0, 0), upper = c(2, 2))
@@ -62,7 +62,7 @@ test_that("graph generation: manual passing of coordinates weights works", {
   weights[1, 4] = 4
   g = addWeights(g, weights = weights)
 
-  expect_class(g, "mcGP")
+  expect_class(g, "grapherator")
   expect_true(g$n.nodes == 30L)
   expect_true(g$n.clusters == 3L)
   expect_true(g$n.weights == 3L)
@@ -74,8 +74,8 @@ test_that("graph generation: manual passing of coordinates weights works", {
 
 
 test_that("graph generation: check correct error messages", {
-  expect_error(mcGP(lower = 10, upper = 5))
+  expect_error(graph(lower = 10, upper = 5))
 
-  g = mcGP(lower = 0, upper = 100)
+  g = graph(lower = 0, upper = 100)
   expect_error(addWeights(g, method = "euclidean"), regexp = "first place")
 })

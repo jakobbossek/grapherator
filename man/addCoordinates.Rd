@@ -8,7 +8,7 @@ addCoordinates(graph, n, generator, coordinates = NULL, by.centers = FALSE,
   par.fun = NULL, ...)
 }
 \arguments{
-\item{graph}{[\code{mcGP}]\cr
+\item{graph}{[\code{grapherator}]\cr
 Multi-objective graph problem.}
 
 \item{n}{[\code{integer}]\cr
@@ -44,12 +44,12 @@ determine additional parameters for the \code{generator} for each cluster.}
 Furhter arguments passed down to \code{generator}.}
 }
 \value{
-[\code{mcGP}] Multi-objective graph problem.
+[\code{grapherator}] Multi-objective graph problem.
 }
 \description{
 Places node coordinates in the two-dimensional euclidean plane.
 }
 \seealso{
 Other graph generators: \code{\link{addEdges}},
-  \code{\link{addWeights}}, \code{\link{mcGP}}
+  \code{\link{addWeights}}, \code{\link{graph}}
 }

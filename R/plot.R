@@ -1,7 +1,7 @@
 #' @title Visualize bi-objective graph.
 #'
-#' @description Only applicable for bi-objective problems of class \code{mcGP}.
-#' \code{plot.mcGP} generates a scatterplot of edge weights. If the nodes do
+#' @description Only applicable for bi-objective problems of class \code{grapherator}.
+#' \code{plot.grapherator} generates a scatterplot of edge weights. If the nodes do
 #' have coordinates, additionally a scatterplot of the nodes in the euclidean
 #' plane is generated.
 #'
@@ -17,14 +17,14 @@
 #'   Default is \code{TRUE}.
 #' @param ... [any]\cr
 #'   Not used at the moment.
-#' @param x [\code{mcGP}]\cr
+#' @param x [\code{grapherator}]\cr
 #'   Multi-objective graph problem.
 #' @param y Not used at the moment.
 #' @return [\code{list}] A list of \code{\link[ggplot2]{ggplot}} objects with components
 #' \code{pl.weights} (scatterplot of edge weights) and eventually \code{pl.coords} (scatterplot of
 #' nodes). The latter is \code{NULL}, if \code{graph} has no associated coordinates.
 #' @export
-plot.mcGP = function(x, y = NULL, show.cluster.centers = TRUE, highlight.clusters = FALSE, show.edges = TRUE, ...) {
+plot.grapherator = function(x, y = NULL, show.cluster.centers = TRUE, highlight.clusters = FALSE, show.edges = TRUE, ...) {
   assertFlag(show.cluster.centers)
   assertFlag(highlight.clusters)
   assertFlag(show.edges)
@@ -37,7 +37,7 @@ plot.mcGP = function(x, y = NULL, show.cluster.centers = TRUE, highlight.cluster
   pl.coords = NULL
 
   if (n.weights > 2L)
-    stopf("plot.mcGP: More than 2 weights are currently not supported.")
+    stopf("plot.grapherator: More than 2 weights are currently not supported.")
 
   # draw coordinates if possible
   if (!is.null(x$coordinates)) {

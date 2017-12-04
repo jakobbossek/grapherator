@@ -1,6 +1,6 @@
 #' @title Export/import multi-criteria graph instance.
 #'
-#' @description Given a \code{mcGP} graph instance function \code{\link{writeGP}}
+#' @description Given a \code{grapherator} graph instance function \code{\link{writeGP}}
 #' saves the graph to a file. Function \code{\link{readGP}} imports a graph
 #' given a filename.
 #'
@@ -18,17 +18,17 @@
 #' I.e., each two node numbers i and j followed by the p weights of the edge
 #' (i, j).
 #'
-#' @template arg_mcGP
+#' @template arg_grapherator
 #' @param file [\code{character(1)}]\cr
 #'   Path to file where the graph problem shall be stored (for \code{\link{writeGP}})
 #'   or which contains the graph problem to be imported (for \code{link{readGP}}).
 #' @return Function \code{\link{writeGP}} silently returns the passed filename
-#' \code{file} whereas \code{\link{writeGP}} returns a \code{mcGP} object.
+#' \code{file} whereas \code{\link{writeGP}} returns a \code{grapherator} object.
 #' @rdname writeGP
 #' @name writeGP
 #' @export
 writeGP = function(graph, file) {
-  assertClass(graph, "mcGP")
+  assertClass(graph, "grapherator")
   con = file(path.expand(file), "w")
   on.exit(close(con))
 
@@ -80,7 +80,7 @@ readGP = function(file) {
   on.exit(close(con))
 
   # generate bare graph
-  g = mcGP(lower = 0, upper = 100)
+  g = graph(lower = 0, upper = 100)
 
   # import meta data
   meta = scan(file = con, what = integer(), n = 4L, sep = ",", quiet = TRUE)

@@ -11,10 +11,10 @@
 #'   Lower bounds for coordinates.
 #' @param upper [\code{integer(1)}]\cr
 #'   Upper bounds for coordinates.
-#' @template ret_mcGP
+#' @template ret_grapherator
 #' @family graph generators
 #' @export
-mcGP = function(lower, upper) {
+graph = function(lower, upper) {
   #n = asInt(n, lower = 2L)
   if (length(lower) == 1L)
     lower = rep(lower, 2L)
@@ -23,7 +23,7 @@ mcGP = function(lower, upper) {
   assertNumeric(lower, len = 2L, any.missing = FALSE, all.missing = FALSE)
   assertNumeric(upper, len = 2L, any.missing = FALSE, all.missing = FALSE)
   if (any(lower >= upper))
-    stopf("mcGP: all elements of lower need to be stricly lower than the corresponding
+    stopf("grapherator: all elements of lower need to be stricly lower than the corresponding
       value in upper!")
   BBmisc::makeS3Obj(
     lower = lower,
@@ -37,11 +37,11 @@ mcGP = function(lower, upper) {
     weights = list(),
     membership = NULL,
     coordinates = NULL,
-    classes = "mcGP")
+    classes = "grapherator")
 }
 
 #' @export
-print.mcGP = function(x, ...) {
+print.grapherator = function(x, ...) {
   catf("MULTI-OBJECTIVE GRAPH PROBLEM")
   catf("Number of nodes: %i", x$n.nodes)
   if (x$n.clusters > 0L)
@@ -154,7 +154,7 @@ coordNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
 #'
 #' @description Places node coordinates in the two-dimensional euclidean plane.
 #'
-#' @template arg_mcGP
+#' @template arg_grapherator
 #' @param n [\code{integer}]\cr
 #'   Number of coordinates to place. If \code{by.centers} is \code{FALSE} a single
 #'   integer value is expected. Otherwise, a vector v may be passed. In this case
@@ -181,11 +181,11 @@ coordNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
 #'   determine additional parameters for the \code{generator} for each cluster.
 #' @param ... [any]\cr
 #'   Furhter arguments passed down to \code{generator}.
-#' @template ret_mcGP
+#' @template ret_grapherator
 #' @family graph generators
 #' @export
 addCoordinates = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, par.fun = NULL, ...) {
-  assertClass(graph, "mcGP")
+  assertClass(graph, "grapherator")
   if (!is.null(coordinates)) {
     assertMatrix(coordinates, mode = "numeric", min.rows = 1L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
     n = nrow(coordinates)
@@ -272,7 +272,7 @@ addCoordinates = function(graph, n, generator, coordinates = NULL, by.centers = 
 #' matrix to make the graph more sparse. The method can be applied multiple times
 #' with different parameterizations.
 #'
-#' @template arg_mcGP
+#' @template arg_grapherator
 #' @param method [\code{function(...)}]\cr
 #'   Method applied to \code{graph} in order to determine which edges to keep.
 #'   Possible values are \dQuote{onion}, \dQuote{delauney}, \dQuote{wayman} or \dQuote{grid}.
@@ -283,9 +283,9 @@ addCoordinates = function(graph, n, generator, coordinates = NULL, by.centers = 
 #' @param ... [any]\cr
 #'   Passed down to edge constructor.
 #' @family graph generators
-#' @template ret_mcGP
+#' @template ret_grapherator
 addEdges = function(graph, method, type = "all", ...) { # nocov start
-  assertClass(graph, "mcGP")
+  assertClass(graph, "grapherator")
   assertFunction(method)
   assertChoice(type, choices = c("all", "intercluster", "intracluster"))
 
@@ -477,7 +477,7 @@ addEdgesSpanningTree = function(n, coordinates, runs = 1L, ...) {
 #' case \code{\link[stats]{dist}} is applied with the cooresponding \code{method}).
 #' Alternatively, all kinds of random weights can be generated.
 #'
-#' @template arg_mcGP
+#' @template arg_grapherator
 #' @param method [\code{character(1)}]\cr
 #'   Method used to generate weights. Possible values are \dQuote{euclidean}, \dQuote{maximum},
 #'   \dQuote{manhatten}, \dQuote{canberra}, \dQuote{binary}, \code{minkowski} or \code{random}.
@@ -504,11 +504,11 @@ addEdgesSpanningTree = function(n, coordinates, runs = 1L, ...) {
 #' @param ... [any]\cr
 #'   Additional arguments passed down to \code{weight.fun} or \code{\link[stats]{dist}}. See
 #'   documentation of argument \code{method} for details.
-#' @template ret_mcGP
+#' @template ret_grapherator
 #' @family graph generators
 #' @export
 addWeights = function(graph, method = "euclidean", weights = NULL, weight.fun = NULL, symmetric = TRUE, to.int = FALSE, rho = 0.5, ...) {
-  assertClass(graph, "mcGP")
+  assertClass(graph, "grapherator")
   assertChoice(method, choices = c("correlated", "concave", "euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski", "random"))
   assertFlag(to.int)
   assertNumber(rho, lower = -1, upper = 1)

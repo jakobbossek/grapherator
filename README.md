@@ -16,7 +16,7 @@
 Here we first generate a bi-criteria graph problem with n = 25 nodes. The first objective is the euclidean distance of node coordinates in the euclidean plane [0, 10] x [0, 10]. The second objective follows a normal distribution (N(5, 1.5)). 
 ```r
 set.seed(1)
-g = mcGP(lower = 0, upper = 10)
+g = graph(lower = 0, upper = 10)
 g = addCoordinates(g, n = 25, generator = coordUniform)
 g = addWeights(g, method = "euclidean")
 g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.5)

@@ -10,7 +10,7 @@ writeGP(graph, file)
 readGP(file)
 }
 \arguments{
-\item{graph}{[\code{mcGP}]\cr
+\item{graph}{[\code{grapherator}]\cr
 Multi-objective graph problem.}
 
 \item{file}{[\code{character(1)}]\cr
@@ -19,10 +19,10 @@ or which contains the graph problem to be imported (for \code{link{readGP}}).}
 }
 \value{
 Function \code{\link{writeGP}} silently returns the passed filename
-\code{file} whereas \code{\link{writeGP}} returns a \code{mcGP} object.
+\code{file} whereas \code{\link{writeGP}} returns a \code{grapherator} object.
 }
 \description{
-Given a \code{mcGP} graph instance function \code{\link{writeGP}}
+Given a \code{grapherator} graph instance function \code{\link{writeGP}}
 saves the graph to a file. Function \code{\link{readGP}} imports a graph
 given a filename.
 }

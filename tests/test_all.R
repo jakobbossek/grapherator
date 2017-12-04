@@ -1,3 +1,3 @@
 library(testthat)
-test_check("mcMST")
+test_check("grapherator")
 

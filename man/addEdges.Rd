@@ -7,7 +7,7 @@
 addEdges(graph, method, type = "all", ...)
 }
 \arguments{
-\item{graph}{[\code{mcGP}]\cr
+\item{graph}{[\code{grapherator}]\cr
 Multi-objective graph problem.}
 
 \item{method}{[\code{function(...)}]\cr
@@ -23,7 +23,7 @@ applies \code{method} to the cluster centers.}
 Passed down to edge constructor.}
 }
 \value{
-[\code{mcGP}] Multi-objective graph problem.
+[\code{grapherator}] Multi-objective graph problem.
 }
 \description{
 By default \code{\link{addWeights}} generates n(n-1)/2 weights, i.e.,
@@ -33,5 +33,5 @@ with different parameterizations.
 }
 \seealso{
 Other graph generators: \code{\link{addCoordinates}},
-  \code{\link{addWeights}}, \code{\link{mcGP}}
+  \code{\link{addWeights}}, \code{\link{graph}}
 }
