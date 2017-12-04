@@ -3,8 +3,8 @@ context("{write,read}GP")
 test_that("writeGP and readGP work well", {
   # test instance
   g = graph(lower = c(0, 0), upper = c(100, 100))
-  g = addCoordinates(g, n = 3, generator = addNodesUniform)
-  g = addCoordinates(g, n = 9, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(10, 10))
+  g = addNodes(g, n = 3, generator = addNodesUniform)
+  g = addNodes(g, n = 9, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(10, 10))
   g = addEdges(g, method = addEdgesDelauney, type = "intracluster")
   g = addEdges(g, method = addEdgesWaxman, type = "intercluster", alpha = 0.8, beta = 0.6)
   g = addWeights(g, method = "correlated", rho = -0.9)

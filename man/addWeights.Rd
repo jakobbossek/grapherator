@@ -54,6 +54,6 @@ case \code{\link[stats]{dist}} is applied with the cooresponding \code{method}).
 Alternatively, all kinds of random weights can be generated.
 }
 \seealso{
-Other graph generators: \code{\link{addCoordinates}},
-  \code{\link{addEdges}}, \code{\link{graph}}
+Other graph generators: \code{\link{addEdges}},
+  \code{\link{addNodes}}, \code{\link{graph}}
 }

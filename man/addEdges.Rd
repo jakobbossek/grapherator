@@ -32,6 +32,6 @@ matrix to make the graph more sparse. The method can be applied multiple times
 with different parameterizations.
 }
 \seealso{
-Other graph generators: \code{\link{addCoordinates}},
+Other graph generators: \code{\link{addNodes}},
   \code{\link{addWeights}}, \code{\link{graph}}
 }

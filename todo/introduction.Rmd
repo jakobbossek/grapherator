@@ -29,7 +29,7 @@ library(mcMST)
 library(gridExtra)
 set.seed(1) # reproducability
 g = graph(lower = 0, upper = 10)
-g = addCoordinates(g, n = 25, generator = addNodesUniform)
+g = addNodes(g, n = 25, generator = addNodesUniform)
 g = addWeights(g, method = "euclidean")
 g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.5)
 print(g)

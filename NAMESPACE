@@ -2,7 +2,7 @@
 
 S3method(plot,grapherator)
 S3method(print,grapherator)
-export(addCoordinates)
+export(addNodes)
 export(addNodesGrid)
 export(addNodesLHS)
 export(addNodesNormal)

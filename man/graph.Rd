@@ -20,11 +20,11 @@ Upper bounds for coordinates.}
 This function generates a bare multi-objective graph. The generated
 object does not contain nodes, edges or edge weights. It serves as a starting
 point for a three step-approach of multi-objective graph problem construction:
-1) Add nodes respectively coordinates via \code{\link{addCoordinates}}, add edges
+1) Add nodes respectively coordinates via \code{\link{addNodes}}, add edges
 via \code{\link{addEdges}} and finally add edge weights with the function
 \code{\link{addWeights}}.
 }
 \seealso{
-Other graph generators: \code{\link{addCoordinates}},
-  \code{\link{addEdges}}, \code{\link{addWeights}}
+Other graph generators: \code{\link{addEdges}},
+  \code{\link{addNodes}}, \code{\link{addWeights}}
 }

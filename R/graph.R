@@ -3,7 +3,7 @@
 #' @description This function generates a bare multi-objective graph. The generated
 #' object does not contain nodes, edges or edge weights. It serves as a starting
 #' point for a three step-approach of multi-objective graph problem construction:
-#' 1) Add nodes respectively coordinates via \code{\link{addCoordinates}}, add edges
+#' 1) Add nodes respectively coordinates via \code{\link{addNodes}}, add edges
 #' via \code{\link{addEdges}} and finally add edge weights with the function
 #' \code{\link{addWeights}}.
 #'
@@ -184,7 +184,7 @@ addNodesNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
 #' @template ret_grapherator
 #' @family graph generators
 #' @export
-addCoordinates = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, par.fun = NULL, ...) {
+addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, par.fun = NULL, ...) {
   assertClass(graph, "grapherator")
   if (!is.null(coordinates)) {
     assertMatrix(coordinates, mode = "numeric", min.rows = 1L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
