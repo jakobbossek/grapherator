@@ -1,6 +1,6 @@
-#' @title Export/import multi-criteria graph instance.
+#' @title Export/import graph.
 #'
-#' @description Given a \code{grapherator} graph instance function \code{\link{writeGP}}
+#' @description Given a \code{grapherator} graph function \code{\link{writeGP}}
 #' saves the graph to a file. Function \code{\link{readGP}} imports a graph
 #' given a filename.
 #'
@@ -20,8 +20,8 @@
 #'
 #' @template arg_grapherator
 #' @param file [\code{character(1)}]\cr
-#'   Path to file where the graph problem shall be stored (for \code{\link{writeGP}})
-#'   or which contains the graph problem to be imported (for \code{link{readGP}}).
+#'   Path to file where the graph shall be stored (for \code{\link{writeGP}})
+#'   or which contains the graph to be imported (for \code{link{readGP}}).
 #' @return Function \code{\link{writeGP}} silently returns the passed filename
 #' \code{file} whereas \code{\link{writeGP}} returns a \code{grapherator} object.
 #' @rdname writeGP

@@ -1,8 +1,8 @@
 #' @title Visualize bi-objective graph.
 #'
-#' @description Only applicable for bi-objective problems of class \code{grapherator}.
+#' @description Only applicable for graph with exactly two weights per edge.
 #' \code{plot.grapherator} generates a scatterplot of edge weights. If the nodes do
-#' have coordinates, additionally a scatterplot of the nodes in the euclidean
+#' have coordinates, additionally a scatterplot of the nodes in the Euclidean
 #' plane is generated.
 #'
 #' @param show.cluster.centers [\code{logical(1)}]\cr
@@ -18,7 +18,7 @@
 #' @param ... [any]\cr
 #'   Not used at the moment.
 #' @param x [\code{grapherator}]\cr
-#'   Multi-objective graph problem.
+#'   Graph.
 #' @param y Not used at the moment.
 #' @return [\code{list}] A list of \code{\link[ggplot2]{ggplot}} objects with components
 #' \code{pl.weights} (scatterplot of edge weights) and eventually \code{pl.coords} (scatterplot of

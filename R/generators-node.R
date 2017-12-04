@@ -1,24 +1,28 @@
-#' @title Coordinate generators.
+#' @title Node generators.
 #'
-#' @description Functions for the placement of node coordinates in the
-#' euclidean plane. Function \code{addNodesLHS} generates a space-filling
-#' latin hypercube sample, \code{addNodesUniform} samples points from a
+#' @description Functions for the placement of nodes / node coordinates in the
+#' Euclidean plane. Function \code{addNodesLHS} generates a space-filling
+#' Latin-Hypercube-Sample (LHS), function \code{addNodesUniform} samples points from a
 #' bivariate uniform distribution, \code{addNodesGrid} generates a regular
-#' grid of points, \code{addNodesTriangular} generates a regular triangular
-#' grid and \code{addNodesNormal} generates nodes on basis of a normal
+#' grid/lattice of points, \code{addNodesTriangular} generates a regular triangular
+#' grid/lattice and \code{addNodesNormal} generates nodes on basis of a normal
 #' distribution.
 #'
+#' @note These functions are not meant to be called directly. Instead, they need
+#' to be assigned to the \code{generator} argument of \code{\link{addNodes}}.
+#'
 #' @param n [\code{integer(1)}]\cr
-#'   Number of points to generate.
+#'   Number of nodes to generate.
 #' @param lower [\code{numeric(2)}]\cr
-#'   Minimal values for the first and second coordinates respectively.
-#'   Default is 0.
+#'   Minimal values for the first and second node coordinates respectively.
+#'   Default is 0 for both dimensions.
 #' @param upper [\code{numeric(2)}]\cr
-#'   Maximal values for the first and second coordinates respectively.
-#'   Default is 1.
+#'   Maximal values for the first and second node coordinates respectively.
+#'   Default is 1 for both dimensions.
 #' @param method [\code{function}]\cr
 #'   Function from package \pkg{lhs}.
 #'   Default is \code{\link[lhs]{maximinLHS}}.
+#'   Only relevant for \code{\link{addNodesLHS}}.
 #' @param x.mean [\code{numeric}]\cr
 #'   Mean value of normal distribution for x-value generation.
 #'   Only relevant for \code{\link{addNodesNormal}}.
@@ -31,9 +35,13 @@
 #' @param y.sd [\code{numeric}]\cr
 #'   Standard deviation of normal distribution for y-value generation.
 #'   Only relevant for \code{\link{addNodesNormal}}.
-#' @return [\code{matrix(n, 2)}] Matrix of node coordinates.
-#' @rdname coordGenerators
-#' @name coordGenerators
+#' @return [\code{list}] List with components:
+#' \describe{
+#'   \item{coords [\code{matrix(n, 2)}]}{Matrix of node coordinates.}
+#'   \item{generator [\code{character(1)}]}{String description of the generator used.}
+#' }
+#' @rdname nodeGenerators
+#' @name nodeGenerators
 #' @export
 addNodesLHS = function(n, lower = 0, upper = 1, method = NULL) {
   if (is.null(method)) {
@@ -48,7 +56,7 @@ addNodesLHS = function(n, lower = 0, upper = 1, method = NULL) {
 }
 
 #' @export
-#' @rdname coordGenerators
+#' @rdname nodeGenerators
 addNodesUniform = function(n, lower, upper) {
   coords = lapply(seq_len(2L), function(i) {
     runif(n, min = lower[i], max = upper[i])
@@ -58,7 +66,7 @@ addNodesUniform = function(n, lower, upper) {
 }
 
 #' @export
-#' @rdname coordGenerators
+#' @rdname nodeGenerators
 addNodesTriangular = function(n, lower, upper) {
   m = sqrt(n)
   # determine offset of each second line
@@ -74,7 +82,7 @@ addNodesTriangular = function(n, lower, upper) {
 }
 
 #' @export
-#' @rdname coordGenerators
+#' @rdname nodeGenerators
 addNodesGrid = function(n, lower, upper) {
   m = sqrt(n)
   x1 = seq(lower[1], upper[1], length.out = m)
@@ -86,7 +94,7 @@ addNodesGrid = function(n, lower, upper) {
 }
 
 #' @export
-#' @rdname coordGenerators
+#' @rdname nodeGenerators
 addNodesNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
   x1 = rnorm(n, x.mean, x.sd)
   x2 = rnorm(n, y.mean, y.sd)
