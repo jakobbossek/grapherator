@@ -8,10 +8,10 @@ graph(lower, upper)
 }
 \arguments{
 \item{lower}{[\code{integer(1)}]\cr
-Lower bounds for node coordinates in the euclidean plane.}
+Lower bounds for node coordinates in the Euclidean plane.}
 
 \item{upper}{[\code{integer(1)}]\cr
-Upper bounds for node coordinates in the euclidean plane.}
+Upper bounds for node coordinates in the Euclidean plane.}
 }
 \value{
 [\code{grapherator}] Graph.

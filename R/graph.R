@@ -8,9 +8,9 @@
 #' \code{\link{addWeights}}.
 #'
 #' @param lower [\code{integer(1)}]\cr
-#'   Lower bounds for node coordinates in the euclidean plane.
+#'   Lower bounds for node coordinates in the Euclidean plane.
 #' @param upper [\code{integer(1)}]\cr
-#'   Upper bounds for node coordinates in the euclidean plane.
+#'   Upper bounds for node coordinates in the Euclidean plane.
 #' @template ret_grapherator
 #' @family graph generators
 #' @export

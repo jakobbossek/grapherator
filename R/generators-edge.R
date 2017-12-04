@@ -96,7 +96,7 @@ addEdgesOnion = function(graph, ...) {
   n.edges = 0L
   while (TRUE) {
     # compute hull of remaining points
-    ch = chull(coordinates2[!coords.done, , drop = FALSE])
+    ch = grDevices::chull(coordinates2[!coords.done, , drop = FALSE])
     n.edges = n.edges + length(ch) - 1L
     # close hull
     ch = c(ch, ch[1L])
@@ -122,10 +122,9 @@ addEdgesDelauney = function(graph, ...) {
   n = graph$n.nodes
   coordinates = graph$coordinates
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
-  requirePackages("deldir", why = "mcMST:addEdges")
   # compute triangulation
   # The 5, 6 colums contains the indizes of the points
-  dt = deldir(as.data.frame(coordinates))$delsgs[, 5:6]
+  dt = deldir::deldir(as.data.frame(coordinates))$delsgs[, 5:6]
   for (i in seq_row(dt)) {
     adj.mat[dt[i, 1L], dt[i, 2L]] = TRUE
     adj.mat[dt[i, 2L], dt[i, 1L]] = TRUE

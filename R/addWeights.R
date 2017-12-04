@@ -31,7 +31,6 @@
 addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE, to.int = FALSE, ...) {
   assertClass(graph, "grapherator")
   assertFunction(generator, null.ok = TRUE)
-  #assertChoice(method, choices = c("correlated", "concave", "euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski", "random"))
   assertFlag(to.int)
   assertFlag(symmetric)
 
@@ -43,6 +42,9 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
   n.nodes = graph$n.nodes
   if (n.nodes == 0)
     stopf("addWeights: first place nodes/coordinates and add edges.")
+
+  if (is.null(graph$adj.mat))
+    graph = addEdges(graph, generator = addEdgesComplete)
 
   if (!is.null(weights))
     assertMatrix(weights, nrows = n.nodes, ncols = n.nodes, mode = "numeric")
