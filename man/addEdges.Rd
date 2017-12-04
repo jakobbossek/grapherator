@@ -7,12 +7,11 @@
 addEdges(graph, generator, type = "all", ...)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
-\item{generator}{[\code{function(...)}]\cr
-Method applied to \code{graph} in order to determine which edges to keep.
-Possible values are \dQuote{onion}, \dQuote{delauney}, \dQuote{wayman} or \dQuote{grid}.}
+\item{generator}{[\code{function(graph, ...)}]\cr
+Method applied to \code{graph} in order to determine which edges to add.}
 
 \item{type}{[\code{character(1)}]\cr
 Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
@@ -24,7 +23,7 @@ Default is \dQuote{all}.}
 Further arguments passed down to edge generator \code{generator}.}
 }
 \value{
-[\code{grapherator}] Graph.
+[\code{\link{grapherator}}] Graph.
 }
 \description{
 This method allows to add edges to a \code{grapherator} graph.

@@ -5,9 +5,8 @@
 #' add edges in clusters first and add edges between clusters in a second step.
 #'
 #' @template arg_grapherator
-#' @param generator [\code{function(...)}]\cr
-#'   Method applied to \code{graph} in order to determine which edges to keep.
-#'   Possible values are \dQuote{onion}, \dQuote{delauney}, \dQuote{wayman} or \dQuote{grid}.
+#' @param generator [\code{function(graph, ...)}]\cr
+#'   Method applied to \code{graph} in order to determine which edges to add.
 #' @param type [\code{character(1)}]\cr
 #'   Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
 #'   instead applies the method for each cluster separately. Lastly, value \dQuote{intercluster}

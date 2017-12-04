@@ -1,6 +1,6 @@
 #' @title Add nodes to graph.
 #'
-#' @description Places node coordinates in the two-dimensional euclidean plane.
+#' @description Places node coordinates in the two-dimensional Euclidean plane.
 #'
 #' @template arg_grapherator
 #' @param n [\code{integer}]\cr
@@ -15,7 +15,7 @@
 #'   and \code{par.fun} are ignored. This parameter is handy, if one wants to add
 #'   coordinates by hand.
 #'   Default is \code{NULL}.
-#' @param generator [\code{function(n, ...)}]\cr
+#' @param generator [\code{function(graph, ...)}]\cr
 #'   Function used to generate nodes. The functions needs to expect the number
 #'   of points to generate as the first argument \code{n}. Additional control argument are
 #'   possible.

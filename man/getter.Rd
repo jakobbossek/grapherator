@@ -29,7 +29,7 @@ getAdjacencyMatrix(graph)
 getNodeDegrees(graph)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{cluster.centers}{[\code{logical(1)}]\cr

@@ -1,1 +1,1 @@
-#' @return [\code{grapherator}] Graph.
+#' @return [\code{\link{grapherator}}] Graph.

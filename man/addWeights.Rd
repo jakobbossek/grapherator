@@ -8,7 +8,7 @@ addWeights(graph, generator = NULL, weights = NULL, symmetric = TRUE,
   to.int = FALSE, ...)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{generator}{[\code{function(graph, ...)}]\cr
@@ -34,15 +34,12 @@ Default is \code{FALSE}.}
 Additional arguments passed down to \code{generator}.}
 }
 \value{
-[\code{grapherator}] Graph.
+[\code{\link{grapherator}}] Graph.
 }
 \description{
 \code{addWeights} allows to add edge weights to a graph. This is
 the last step of the graph generation process. Note that adding edges is not
-possible once \code{addWeights} was called.
-The weights can be generated on basis of the node coordinates (in this
-case \code{\link[stats]{dist}} is applied with the cooresponding \code{method}).
-Alternatively, all kinds of random weights can be generated.
+possible once \code{addWeights} was called once.
 }
 \seealso{
 Other graph generators: \code{\link{addEdges}},

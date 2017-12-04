@@ -23,7 +23,7 @@ addEdgesWaxman(graph, alpha = 0.5, beta = 0.5, ...)
 addEdgesSpanningTree(graph, runs = 1L, ...)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{...}{[any]\cr

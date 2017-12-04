@@ -1,2 +1,2 @@
-#' @param graph [\code{grapherator}]\cr
+#' @param graph [\code{\link{grapherator}}]\cr
 #'   Graph.

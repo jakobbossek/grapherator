@@ -10,7 +10,7 @@ writeGP(graph, file)
 readGP(file)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{file}{[\code{character(1)}]\cr

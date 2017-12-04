@@ -8,7 +8,7 @@ addNodes(graph, n, generator, coordinates = NULL, by.centers = FALSE,
   par.fun = NULL, ...)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{n}{[\code{integer}]\cr
@@ -18,7 +18,7 @@ integer value is expected. Otherwise, a vector \eqn{v} may be passed. In this ca
 passed and \code{by.center == TRUE}, each cluster is assigned the same number of
 nodes.}
 
-\item{generator}{[\code{function(n, ...)}]\cr
+\item{generator}{[\code{function(graph, ...)}]\cr
 Function used to generate nodes. The functions needs to expect the number
 of points to generate as the first argument \code{n}. Additional control argument are
 possible.}
@@ -44,10 +44,10 @@ determine additional parameters for the \code{generator} for each cluster.}
 Further arguments passed down to \code{generator}.}
 }
 \value{
-[\code{grapherator}] Graph.
+[\code{\link{grapherator}}] Graph.
 }
 \description{
-Places node coordinates in the two-dimensional euclidean plane.
+Places node coordinates in the two-dimensional Euclidean plane.
 }
 \seealso{
 Other graph generators: \code{\link{addEdges}},

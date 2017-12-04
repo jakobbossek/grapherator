@@ -16,7 +16,7 @@ addWeightsDistance(graph, method, ...)
 addWeightsRandom(graph, method, ...)
 }
 \arguments{
-\item{graph}{[\code{grapherator}]\cr
+\item{graph}{[\code{\link{grapherator}}]\cr
 Graph.}
 
 \item{xhi}{[\code{integer(1)}]\cr
