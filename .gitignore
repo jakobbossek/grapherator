@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+ecr_*.tar.gz
+playground.R
+test_specific.R
+Rplots.pdf
+inst/doc
