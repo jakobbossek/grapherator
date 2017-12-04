@@ -5,9 +5,9 @@ test_that("writeGP and readGP work well", {
   g = graph(lower = c(0, 0), upper = c(100, 100))
   g = addNodes(g, n = 3, generator = addNodesUniform)
   g = addNodes(g, n = 9, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(10, 10))
-  g = addEdges(g, method = addEdgesDelauney, type = "intracluster")
-  g = addEdges(g, method = addEdgesWaxman, type = "intercluster", alpha = 0.8, beta = 0.6)
-  g = addWeights(g, method = "correlated", rho = -0.9)
+  g = addEdges(g, generator = addEdgesDelauney, type = "intracluster")
+  g = addEdges(g, generator = addEdgesWaxman, type = "intercluster", alpha = 0.8, beta = 0.6)
+  g = addWeights(g, generator = addWeightsCorrelated, rho = -0.9)
 
   filename = "test.mcgp"
   writeGP(g, filename)

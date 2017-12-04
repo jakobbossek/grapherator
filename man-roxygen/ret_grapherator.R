@@ -1,1 +1,1 @@
-#' @return [\code{grapherator}] Multi-objective graph problem.
+#' @return [\code{grapherator}] Graph.

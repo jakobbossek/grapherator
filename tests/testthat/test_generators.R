@@ -6,17 +6,17 @@ test_that("graph generation: simple 2o graph", {
 
   g = graph(lower = 0, upper = 100)
   g = addNodes(g, n = 50L, generator = addNodesUniform)
-  g = addWeights(g, method = "euclidean", symmetric = TRUE)
-  g = addWeights(g, method = "random", weight.fun = runif, symmetric = TRUE)
+  g = addWeights(g, generator = addWeightsDistance, method = "euclidean", symmetric = TRUE)
+  g = addWeights(g, generator = addWeightsRandom, method = runif, symmetric = TRUE)
 
   expect_class(g, "grapherator")
   expect_true(g$n.nodes == 50L)
   expect_true(g$n.clusters == 0L)
   expect_true(g$n.weights == 2L)
-  expect_set_equal(g$weight.types, c("distance", "random"))
+  expect_set_equal(g$weight.types, c("distance-euclidean", "random"))
   expect_true(isSymmetricMatrix(g$weights[[1L]]))
   expect_true(isSymmetricMatrix(g$weights[[2L]]))
-  expect_output(print(g), regexp = "MULTI")
+  expect_output(print(g), regexp = "GRAPH")
 
   pls = plot(g)
   expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
@@ -27,14 +27,14 @@ test_that("graph generation: complex clustered graph", {
   g = addNodes(g, n = 3L, generator = addNodesLHS)
   g = addNodes(g, n = 9L, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(1, 1))
   g = addNodes(g, n = 100L, generator = addNodesGrid)
-  g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.3)
-  g = addWeights(g, method = "minkowski", p = 2.5, symmetric = FALSE)
+  g = addWeights(g, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.3)
+  g = addWeights(g, generator = addWeightsDistance, method = "minkowski", p = 2.5, symmetric = FALSE)
 
   # check plotting of cluster centers
   pls = plot(g, show.cluster.centers = TRUE)
   expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
 
-  g = addWeights(g, method = "random", weight.fun = function(n) {
+  g = addWeights(g, generator = addWeightsRandom, method = function(n) {
     sample(c(1, -10), n, replace = TRUE) * rexp(n, rate = 0.1) * 1:n
   })
 
@@ -58,7 +58,7 @@ test_that("graph generation: manual passing of coordinates weights works", {
   expect_equal(center.coordinates, g$center.coordinates)
   weights = diag(30)
   g = addWeights(g, weights = weights)
-  g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.3)
+  g = addWeights(g, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.3)
   weights[1, 4] = 4
   g = addWeights(g, weights = weights)
 
@@ -69,7 +69,7 @@ test_that("graph generation: manual passing of coordinates weights works", {
   expect_list(g$weights, types = "matrix", any.missing = FALSE, all.missing = FALSE, len = g$n.weights)
   expect_true(isSymmetricMatrix(g$weights[[1L]]))
   expect_true(isSymmetricMatrix(g$weights[[2L]]))
-  expect_false(isSymmetricMatrix(g$weights[[3L]]))
+  expect_true(isSymmetricMatrix(g$weights[[3L]])) # converted to symmetric matrix internally
 })
 
 
@@ -77,5 +77,5 @@ test_that("graph generation: check correct error messages", {
   expect_error(graph(lower = 10, upper = 5))
 
   g = graph(lower = 0, upper = 100)
-  expect_error(addWeights(g, method = "euclidean"), regexp = "first place")
+  expect_error(addWeights(g, generator = addWeightsDistance, method = "euclidean"), regexp = "first place")
 })

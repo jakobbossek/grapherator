@@ -90,7 +90,7 @@ readGP = function(file) {
   g$n.weights  = p  = meta[4L]
 
   # import weight and node types
-  g$weight.types = scan(con, what = character(), n = p, sep = ",", quiet = TRUE)
+  g$weight.types = strsplit(scan(con, what = character(), n = 1L, sep = ",", quiet = TRUE), ",")[[1L]]
   g$node.types = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
 
   # import coordinates

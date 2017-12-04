@@ -2,24 +2,24 @@
 % Please edit documentation in R/graph.R
 \name{graph}
 \alias{graph}
-\title{Generate a bare multi-objective graph.}
+\title{Generate a bare graph.}
 \usage{
 graph(lower, upper)
 }
 \arguments{
 \item{lower}{[\code{integer(1)}]\cr
-Lower bounds for coordinates.}
+Lower bounds for node coordinates in the euclidean plane.}
 
 \item{upper}{[\code{integer(1)}]\cr
-Upper bounds for coordinates.}
+Upper bounds for node coordinates in the euclidean plane.}
 }
 \value{
-[\code{grapherator}] Multi-objective graph problem.
+[\code{grapherator}] Graph.
 }
 \description{
-This function generates a bare multi-objective graph. The generated
+This function generates a bare graph. The generated
 object does not contain nodes, edges or edge weights. It serves as a starting
-point for a three step-approach of multi-objective graph problem construction:
+point for a three step approach of graph problem construction:
 1) Add nodes respectively coordinates via \code{\link{addNodes}}, add edges
 via \code{\link{addEdges}} and finally add edge weights with the function
 \code{\link{addWeights}}.

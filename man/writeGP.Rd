@@ -11,7 +11,7 @@ readGP(file)
 }
 \arguments{
 \item{graph}{[\code{grapherator}]\cr
-Multi-objective graph problem.}
+Graph.}
 
 \item{file}{[\code{character(1)}]\cr
 Path to file where the graph problem shall be stored (for \code{\link{writeGP}})
