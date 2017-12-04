@@ -5,7 +5,7 @@ test_that("graph generation: simple 2o graph", {
   # with both euclidean and random weights
 
   g = graph(lower = 0, upper = 100)
-  g = addCoordinates(g, n = 50L, generator = coordUniform)
+  g = addCoordinates(g, n = 50L, generator = addNodesUniform)
   g = addWeights(g, method = "euclidean", symmetric = TRUE)
   g = addWeights(g, method = "random", weight.fun = runif, symmetric = TRUE)
 
@@ -24,9 +24,9 @@ test_that("graph generation: simple 2o graph", {
 
 test_that("graph generation: complex clustered graph", {
   g = graph(lower = 0, upper = 100)
-  g = addCoordinates(g, n = 3L, generator = coordLHS)
-  g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = coordUniform, lower = c(0, 0), upper = c(1, 1))
-  g = addCoordinates(g, n = 100L, generator = coordGrid)
+  g = addCoordinates(g, n = 3L, generator = addNodesLHS)
+  g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(1, 1))
+  g = addCoordinates(g, n = 100L, generator = addNodesGrid)
   g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.3)
   g = addWeights(g, method = "minkowski", p = 2.5, symmetric = FALSE)
 
@@ -54,7 +54,7 @@ test_that("graph generation: manual passing of coordinates weights works", {
   g = graph(lower = 0, upper = 10)
   center.coordinates = matrix(c(1, 2, 2, 5, 8, 3), byrow = TRUE, ncol = 2L)
   g = addCoordinates(g, coordinates = center.coordinates)
-  g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = coordGrid, lower = c(0, 0), upper = c(2, 2))
+  g = addCoordinates(g, n = 9L, by.centers = TRUE, generator = addNodesGrid, lower = c(0, 0), upper = c(2, 2))
   expect_equal(center.coordinates, g$center.coordinates)
   weights = diag(30)
   g = addWeights(g, weights = weights)

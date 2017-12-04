@@ -53,11 +53,11 @@ print.grapherator = function(x, ...) {
 #' @title Coordinate generators.
 #'
 #' @description Functions for the placement of node coordinates in the
-#' euclidean plane. Function \code{coordLHS} generates a space-filling
-#' latin hypercube sample, \code{coordUniform} samples points from a
-#' bivariate uniform distribution, \code{coordGrid} generates a regular
-#' grid of points, \code{coordTriangular} generates a regular triangular
-#' grid and \code{coordNormal} generates nodes on basis of a normal
+#' euclidean plane. Function \code{addNodesLHS} generates a space-filling
+#' latin hypercube sample, \code{addNodesUniform} samples points from a
+#' bivariate uniform distribution, \code{addNodesGrid} generates a regular
+#' grid of points, \code{addNodesTriangular} generates a regular triangular
+#' grid and \code{addNodesNormal} generates nodes on basis of a normal
 #' distribution.
 #'
 #' @param n [\code{integer(1)}]\cr
@@ -73,23 +73,23 @@ print.grapherator = function(x, ...) {
 #'   Default is \code{\link[lhs]{maximinLHS}}.
 #' @param x.mean [\code{numeric}]\cr
 #'   Mean value of normal distribution for x-value generation.
-#'   Only relevant for \code{\link{coordNormal}}.
+#'   Only relevant for \code{\link{addNodesNormal}}.
 #' @param x.sd [\code{numeric}]\cr
 #'   Standard deviation of normal distribution for x-value generation.
-#'   Only relevant for \code{\link{coordNormal}}.
+#'   Only relevant for \code{\link{addNodesNormal}}.
 #' @param y.mean [\code{numeric}]\cr
 #'   Mean value of normal distribution for y-value generation.
-#'   Only relevant for \code{\link{coordNormal}}.
+#'   Only relevant for \code{\link{addNodesNormal}}.
 #' @param y.sd [\code{numeric}]\cr
 #'   Standard deviation of normal distribution for y-value generation.
-#'   Only relevant for \code{\link{coordNormal}}.
+#'   Only relevant for \code{\link{addNodesNormal}}.
 #' @return [\code{matrix(n, 2)}] Matrix of node coordinates.
 #' @rdname coordGenerators
 #' @name coordGenerators
 #' @export
-coordLHS = function(n, lower = 0, upper = 1, method = NULL) {
+addNodesLHS = function(n, lower = 0, upper = 1, method = NULL) {
   if (is.null(method)) {
-    requirePackages("lhs", why = "mcMST::coordLHS", default.method = "load")
+    requirePackages("lhs", why = "mcMST::addNodesLHS", default.method = "load")
     method = lhs::maximinLHS
   }
 
@@ -101,7 +101,7 @@ coordLHS = function(n, lower = 0, upper = 1, method = NULL) {
 
 #' @export
 #' @rdname coordGenerators
-coordUniform = function(n, lower, upper) {
+addNodesUniform = function(n, lower, upper) {
   coords = lapply(seq_len(2L), function(i) {
     runif(n, min = lower[i], max = upper[i])
   })
@@ -111,7 +111,7 @@ coordUniform = function(n, lower, upper) {
 
 #' @export
 #' @rdname coordGenerators
-coordTriangular = function(n, lower, upper) {
+addNodesTriangular = function(n, lower, upper) {
   m = sqrt(n)
   # determine offset of each second line
   d = (upper[1] - lower[1]) / (m - 1)
@@ -120,14 +120,14 @@ coordTriangular = function(n, lower, upper) {
   print(m)
   offset = rep(c(rep(0, m), rep(d, m)), m)[1:n]
   print(offset)
-  coords = coordGrid(n, lower, upper)
+  coords = addNodesGrid(n, lower, upper)
   coords[, 1L] = coords[, 1L] + offset
   return(list(coords = coords, generator = "TNG"))
 }
 
 #' @export
 #' @rdname coordGenerators
-coordGrid = function(n, lower, upper) {
+addNodesGrid = function(n, lower, upper) {
   m = sqrt(n)
   x1 = seq(lower[1], upper[1], length.out = m)
   x2 = seq(lower[2], upper[2], length.out = m)
@@ -139,7 +139,7 @@ coordGrid = function(n, lower, upper) {
 
 #' @export
 #' @rdname coordGenerators
-coordNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
+addNodesNormal = function(n, lower, upper, x.mean, x.sd, y.mean, y.sd) {
   x1 = rnorm(n, x.mean, x.sd)
   x2 = rnorm(n, y.mean, y.sd)
 

@@ -17,7 +17,7 @@ Here we first generate a bi-criteria graph problem with n = 25 nodes. The first 
 ```r
 set.seed(1)
 g = graph(lower = 0, upper = 10)
-g = addCoordinates(g, n = 25, generator = coordUniform)
+g = addCoordinates(g, n = 25, generator = addNodesUniform)
 g = addWeights(g, method = "euclidean")
 g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.5)
 print(g)

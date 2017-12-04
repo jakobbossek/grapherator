@@ -2,22 +2,22 @@
 % Please edit documentation in R/graph.R
 \name{coordGenerators}
 \alias{coordGenerators}
-\alias{coordLHS}
-\alias{coordUniform}
-\alias{coordTriangular}
-\alias{coordGrid}
-\alias{coordNormal}
+\alias{addNodesLHS}
+\alias{addNodesUniform}
+\alias{addNodesTriangular}
+\alias{addNodesGrid}
+\alias{addNodesNormal}
 \title{Coordinate generators.}
 \usage{
-coordLHS(n, lower = 0, upper = 1, method = NULL)
+addNodesLHS(n, lower = 0, upper = 1, method = NULL)
 
-coordUniform(n, lower, upper)
+addNodesUniform(n, lower, upper)
 
-coordTriangular(n, lower, upper)
+addNodesTriangular(n, lower, upper)
 
-coordGrid(n, lower, upper)
+addNodesGrid(n, lower, upper)
 
-coordNormal(n, lower, upper, x.mean, x.sd, y.mean, y.sd)
+addNodesNormal(n, lower, upper, x.mean, x.sd, y.mean, y.sd)
 }
 \arguments{
 \item{n}{[\code{integer(1)}]\cr
@@ -37,29 +37,29 @@ Default is \code{\link[lhs]{maximinLHS}}.}
 
 \item{x.mean}{[\code{numeric}]\cr
 Mean value of normal distribution for x-value generation.
-Only relevant for \code{\link{coordNormal}}.}
+Only relevant for \code{\link{addNodesNormal}}.}
 
 \item{x.sd}{[\code{numeric}]\cr
 Standard deviation of normal distribution for x-value generation.
-Only relevant for \code{\link{coordNormal}}.}
+Only relevant for \code{\link{addNodesNormal}}.}
 
 \item{y.mean}{[\code{numeric}]\cr
 Mean value of normal distribution for y-value generation.
-Only relevant for \code{\link{coordNormal}}.}
+Only relevant for \code{\link{addNodesNormal}}.}
 
 \item{y.sd}{[\code{numeric}]\cr
 Standard deviation of normal distribution for y-value generation.
-Only relevant for \code{\link{coordNormal}}.}
+Only relevant for \code{\link{addNodesNormal}}.}
 }
 \value{
 [\code{matrix(n, 2)}] Matrix of node coordinates.
 }
 \description{
 Functions for the placement of node coordinates in the
-euclidean plane. Function \code{coordLHS} generates a space-filling
-latin hypercube sample, \code{coordUniform} samples points from a
-bivariate uniform distribution, \code{coordGrid} generates a regular
-grid of points, \code{coordTriangular} generates a regular triangular
-grid and \code{coordNormal} generates nodes on basis of a normal
+euclidean plane. Function \code{addNodesLHS} generates a space-filling
+latin hypercube sample, \code{addNodesUniform} samples points from a
+bivariate uniform distribution, \code{addNodesGrid} generates a regular
+grid of points, \code{addNodesTriangular} generates a regular triangular
+grid and \code{addNodesNormal} generates nodes on basis of a normal
 distribution.
 }
