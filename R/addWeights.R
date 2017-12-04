@@ -23,9 +23,6 @@
 #' @param to.int [\code{logical(1)}]\cr
 #'   Should weights be rounded to integer?
 #'   Default is \code{FALSE}.
-# @param rho [\code{numeric(1)}]\cr
-#   Correlation of edges weights for \code{method} \dQuote{correlated}.
-#   Default is \code{0.5}.
 #' @param ... [any]\cr
 #'   Additional arguments passed down to \code{generator}.
 #' @template ret_grapherator
