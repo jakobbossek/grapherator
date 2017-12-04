@@ -34,6 +34,10 @@
 #' @export
 addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, par.fun = NULL, ...) {
   assertClass(graph, "grapherator")
+
+  if (graph$n.edges > 0L)
+    stopf("addEdges: add nodes before adding edges.")
+
   if (!is.null(coordinates)) {
     assertMatrix(coordinates, mode = "numeric", min.rows = 1L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
     n = nrow(coordinates)

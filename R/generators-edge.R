@@ -82,6 +82,7 @@ addEdgesGrid = function(graph, ...) {
 #' @export
 #' @rdname edgeGenerators
 addEdgesOnion = function(graph, ...) {
+  assertClass(graph, "grapherator")
   n = graph$n.nodes
   coordinates = graph$coordinates
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
@@ -117,6 +118,7 @@ addEdgesOnion = function(graph, ...) {
 #' @export
 #' @rdname edgeGenerators
 addEdgesDelauney = function(graph, ...) {
+  assertClass(graph, "grapherator")
   n = graph$n.nodes
   coordinates = graph$coordinates
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
