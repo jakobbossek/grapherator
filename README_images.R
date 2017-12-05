@@ -1,0 +1,27 @@
+library(devtools)
+library(ggplot2)
+
+load_all()
+
+set.seed(1)
+g1 = graph(lower = 0, upper = 10)
+g1 = addNodes(g1, n = 25, generator = addNodesUniform)
+g1 = addWeights(g1, generator = addWeightsDistance, method = "euclidean")
+g1 = addWeights(g1, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.5)
+print(g1)
+do.call(gridExtra::grid.arrange, plot(g1))
+
+set.seed(1)
+g2 = graph(lower = 0, upper = 100)
+g2 = addNodes(g2, n = 10, generator = addNodesLHS)
+g2 = addNodes(g2, n = 29, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(5, 5))
+g2 = addEdges(g2, type = "intracluster", generator = addEdgesGilbert, p = 0.2)
+g2 = addEdges(g2, type = "intracluster", generator = addEdgesSpanningTree)
+g2 = addEdges(g2, type = "intercluster", generator = addEdgesDelauney)
+g2 = addWeights(g2, generator = addWeightsCorrelated, rho = -0.7)
+print(g2)
+do.call(gridExtra::grid.arrange, plot(g2))
+
+pls = c(plot(g1), plot(g2), list(ncol = 2L))
+pl = do.call(gridExtra::grid.arrange, pls)
+ggsave("images/README_graphs.png", plot = pl, width = 15, height = 10)

@@ -9,27 +9,42 @@
 
 ## Introduction
 
-...
+Due to lack of real world data comparisson of algorithms for graph problems is most often carried out on artificially generated graphs. The R package **grapherator** (__graph__ gen__erator__) implements a modular approach to benachmark graph generation focusing on undirected, weighted graphs. The graph generation process follows a three-step procedure:
+1) Node generation, 2) edge generation and finally 3) edge weight generation.
+Each step may be repeated multiple times with different generators before the transition to the next step is conducted.
 
 ## Example
 
-Here we first generate a bi-criteria graph problem with n = 25 nodes. The first objective is the euclidean distance of node coordinates in the euclidean plane [0, 10] x [0, 10]. The second objective follows a normal distribution (N(5, 1.5)). 
+Here, we first generate a bi-criteria complete graph with n = 25 nodes and each two conflicting weights per edge. The first weight is the Euclidean distance of node coordinates in the Euclidean plane [0, 10] x [0, 10]. The second objective follows a N(5, 1.5)-distribution, i.e., a normal distribution with mean 5 and standard deviation 1.5. 
 ```r
 set.seed(1)
-g = graph(lower = 0, upper = 10)
-g = addNodes(g, n = 25, generator = addNodesUniform)
-g = addWeights(g, method = "euclidean")
-g = addWeights(g, method = "random", weight.fun = rnorm, mean = 5, sd = 1.5)
-print(g)
+g1 = graph(lower = 0, upper = 10)
+g1 = addNodes(g1, n = 25, generator = addNodesUniform)
+g1 = addWeights(g1, generator = addWeightsDistance, method = "euclidean")
+g1 = addWeights(g1, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.5)
+print(g1)
+do.call(gridExtra::grid.arrange, plot(g1))
 ```
 
-Next, we apply the genetic algorithm proposed by Zhou & Gen with population size `mu = 10` and number of offspring `lambda = 10` for `max.iter = 100` generations.
+The next example demonstrates multiple iterations of each step to create a complex, clustered, connected network with different edge generators applied for establishing links within clusters and between cluster centers respectively. Detailed description: First, 10 cluster centers are placed via Latin-Hypercube-Sampling (LHS). Next, each cluster is crowded with 29 additional nodes by uniform sampling around the cluster center. Edge generation is done by randomly adding an edge between each two nodes in a cluster with small probability p = 0.2. To ensure connectivity, the spanning tree edge generator is applied. The last step of edge generation connects the clusters via Delauney triangulation. In a final step, two negatively correlated weights are added.
 ```r
-library(ggplot2)
-res = mcMSTEmoaZhou(g, mu = 10L, lambda = 10L, max.iter = 100L)
-ecr::plotFront(res$pareto.front)
+set.seed(1)
+g2 = graph(lower = 0, upper = 100)
+g2 = addNodes(g2, n = 10, generator = addNodesLHS)
+g2 = addNodes(g2, n = 29, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(5, 5))
+g2 = addEdges(g2, type = "intracluster", generator = addEdgesGilbert, p = 0.2)
+g2 = addEdges(g2, type = "intracluster", generator = addEdgesSpanningTree)
+g2 = addEdges(g2, type = "intercluster", generator = addEdgesDelauney)
+g2 = addWeights(g2, generator = addWeightsCorrelated, rho = -0.7)
+print(g2)
+do.call(gridExtra::grid.arrange, plot(g2))
 ```
-See the package vignettes for more details.
+
+The following image shows both example graphs `g1` and `g2`. The topology is shown in the left column, while a scatterplot of the weights is visualized in the right column.
+
+![Example graphs](https://raw.githubusercontent.com/jakobbossek/grapherator/master/images/README_graphs.png)
+
+See the package vignettes for more examples and thorough description.
 
 ## Installation Instructions
 
@@ -55,6 +70,8 @@ Contributions to this software package are welcome via [pull requests](https://h
 
 The following packages provide some methods to generate random graphs:
 
-* [igraph: Network Analysis and Visualization](https://cran.r-project.org/package=igraph)
+* [igraph: Network Analysis and Visualization](https://cran.r-project.org/package=igraph) Includes some methods to generate classical Erdos-Renyi random graphs as well as more recent models, e.g., small-world graphs.
+* [netgen: Network Generator for Combinatorial Graph Problems](https://cran.r-project.org/package=netgen) Contains some methods to generate complete graphs especially for benchmarking Travelling-Salesperson-Problem solvers.
+* [bnlearn: Bayesian Network Structure Learning, Parameter Learning and Inference](https://cran.r-project.org/web/packages/bnlearn/index.html) Function `bnlearn::random.graph` implements some algorithms to create graphs.
 
 
