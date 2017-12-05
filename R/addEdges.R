@@ -16,6 +16,7 @@
 #'   Further arguments passed down to edge generator \code{generator}.
 #' @family graph generators
 #' @template ret_grapherator
+#' @export
 addEdges = function(graph, generator, type = "all", ...) { # nocov start
   assertClass(graph, "grapherator")
   assertFunction(generator)
