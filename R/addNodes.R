@@ -86,7 +86,8 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
     graph$membership = 1:nc
     n = rep(n, nc)
     node.type = NULL
-    coords = lapply(seq_len(nc), function(i) {
+    coords = vector(mode = "list", length = nc)
+    for (i in seq_len(nc)) {
       gen.args = list(n = n[i])
       # generate coordinates in origin
       if (!is.null(par.fun))
@@ -102,8 +103,8 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
       # now move the way that centers are in fact centers
       #FIXME: ugly as hell
       coords.cluster = t(t(coords.cluster) + cl.center - rects / 2)
-      return(coords.cluster)
-    })
+      coords[[i]] = coords.cluster
+    }
     # concatenate coordinates
     coords = do.call(rbind, coords)
     # assign membership (we know which cluster belongs to which center)
