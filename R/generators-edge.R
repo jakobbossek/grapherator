@@ -26,10 +26,15 @@
 #'   ignored in subsequent runs.
 #'   This method is particularly useful to assist probablistic methods, e.g., Waxman model,
 #'   in order to generate connected graphs.}
+#'   \item{\code{addEdgesGilbert}}{Use Gilbert-model to generate edges. I.e., each edge is
+#'   added with probability \eqn{p \in [0, 1]}.}
+#'   \item{\code{addEdgesErdosRenyi}}{In total \eqn{m \leq n(n-1)/2} edges are added at random.}
 #' }
 #'
 #' @note These functions are not meant to be called directly. Instead, they need
 #' to be assigned to the \code{generator} argument of \code{\link{addEdges}}.
+#'
+#' @details Currently all edge generators create symmetric edges only.
 #'
 #' @template arg_grapherator
 #' @param alpha [\code{numeric(1)}]\cr
