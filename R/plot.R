@@ -31,6 +31,7 @@ plot.grapherator = function(x, y = NULL, show.cluster.centers = TRUE, highlight.
 
   # extract data
   n.nodes = x$n.nodes
+  n.edges = x$n.edges
   n.clusters = x$n.clusters
   n.weights = x$n.weights
 
@@ -83,7 +84,7 @@ plot.grapherator = function(x, y = NULL, show.cluster.centers = TRUE, highlight.
     }
 
     pl.coords = pl.coords +
-      ggplot2::ggtitle("Node coordinates", subtitle = sprintf("#nodes: %i, #clusters: %i, node type(s): %s", n.nodes, n.clusters, collapse(x$node.types, ", ")))
+      ggplot2::ggtitle("Network topology", subtitle = sprintf("#nodes: %i, #edges: %i, #clusters: %i\nNode type(s): %s, edge type(s): %s", n.nodes, n.edges, n.clusters, collapse(x$node.types, ", "), collapse(x$edge.types, ", ")))
     pl.coords = pl.coords +
       ggplot2::xlab(expression(x[1])) +
       ggplot2::ylab(expression(x[2]))
