@@ -19,9 +19,9 @@ Upper bounds for node coordinates in the Euclidean plane.}
 \description{
 This function generates a bare graph object of type \code{\link{grapherator}}.
 The generated object does not contain nodes, edges or edge weights. It serves as a starting
-point for a three step approach of graph construction:
-1) Add nodes respectively coordinates via \code{\link{addNodes}}, add edges
-via \code{\link{addEdges}} and finally add edge weights with the function
+point for a three step approach of grapherator graph construction:
+1) Add nodes respectively coordinates via \code{\link{addNodes}}, 2) add edges
+via \code{\link{addEdges}} and finally 3) add edge weights with the function
 \code{\link{addWeights}}.
 }
 \seealso{

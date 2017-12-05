@@ -7,6 +7,8 @@
 \alias{addEdgesOnion}
 \alias{addEdgesDelauney}
 \alias{addEdgesWaxman}
+\alias{addEdgesGilbert}
+\alias{addEdgesErdosRenyi}
 \alias{addEdgesSpanningTree}
 \title{Edge generators.}
 \usage{
@@ -19,6 +21,10 @@ addEdgesOnion(graph, ...)
 addEdgesDelauney(graph, ...)
 
 addEdgesWaxman(graph, alpha = 0.5, beta = 0.5, ...)
+
+addEdgesGilbert(graph, p, ...)
+
+addEdgesErdosRenyi(graph, m, ...)
 
 addEdgesSpanningTree(graph, runs = 1L, ...)
 }
@@ -36,6 +42,14 @@ Default is 0.5.}
 \item{beta}{[\code{numeric(1)}]\cr
 Positive number indicating the scale between short and long edges in the Waxman model.
 Default is 0.5.}
+
+\item{p}{[\code{numeric(1)}]\cr
+Probability for each edge \eqn{(v_i, v_j), i, j = 1, \ldots, n} to be added
+for Gilbert graphs.}
+
+\item{m}{[\code{integer(1)}]\cr
+Number of edges to sample for Erdos-Renyi graphs.
+Must be at most \eqn{n(n-1)/2} where \eqn{n} is the number of nodes of \code{graph}.}
 
 \item{runs}{[\code{integer(1)}]\cr
 Number of runs to perform by \code{\link{addEdgesSpanningTree}}.

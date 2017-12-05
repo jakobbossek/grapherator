@@ -49,6 +49,9 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
   if (n.nodes == 0)
     stopf("addWeights: first place nodes/coordinates and add edges.")
 
+  if (is.null(weights) & is.null(generator))
+    stopf("grapherator::addWeights: one of weights or generator must be provided.")
+
   if (is.null(graph$adj.mat))
     graph = addEdges(graph, generator = addEdgesComplete)
 

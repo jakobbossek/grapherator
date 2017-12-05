@@ -41,6 +41,12 @@
 #' @param runs [\code{integer(1)}]\cr
 #'   Number of runs to perform by \code{\link{addEdgesSpanningTree}}.
 #'   Default is \code{1}.
+#' @param m [\code{integer(1)}]\cr
+#'   Number of edges to sample for Erdos-Renyi graphs.
+#'   Must be at most \eqn{n(n-1)/2} where \eqn{n} is the number of nodes of \code{graph}.
+#' @param p [\code{numeric(1)}]\cr
+#'   Probability for each edge \eqn{(v_i, v_j), i, j = 1, \ldots, n} to be added
+#'   for Gilbert graphs.
 #' @param ... [any]\cr
 #'   Not used at the moment.
 #' @return [\code{list}] List with components:
@@ -157,6 +163,46 @@ addEdgesWaxman = function(graph, alpha = 0.5, beta = 0.5, ...) {
   adj.mat[lower.tri(adj.mat)] = t(adj.mat)[lower.tri(adj.mat)]
 
   return(list(adj.mat = adj.mat, generator = "WEG"))
+}
+
+#' @export
+#' @rdname edgeGenerators
+addEdgesGilbert = function(graph, p, ...) {
+  assertClass(graph, "grapherator")
+  assertNumber(p, lower = 0, upper = 1)
+
+  n = getNumberOfNodes(graph)
+  adj.mat = matrix(runif(n * n), nrow = n) < p
+  return(list(adj.mat = adj.mat, generator = "GilEG"))
+}
+
+#' @export
+#' @rdname edgeGenerators
+addEdgesErdosRenyi = function(graph, m, ...) {
+  assertClass(graph, "grapherator")
+  n = getNumberOfNodes(graph)
+  m = asInt(m, upper = as.integer(n * (n - 1) / 2))
+
+  # possible edges are all n(n-1)/2 edges
+  # Thus, get indizes (i, j) of all upper triangular matrix indizes
+  edges.possible = which(upper.tri(matrix(, n, n)) == TRUE, arr.ind = TRUE)
+
+  # sample m edges without replacement
+  edges.sampled = sample(1:nrow(edges.possible), size = m)
+  edges.sampled = edges.possible[edges.sampled, , drop = FALSE]
+  print(edges.sampled)
+
+  # init empty adjacency matrix
+  adj.mat = matrix(FALSE, ncol = n, nrow = n)
+
+  # add edges
+  adj.mat[edges.sampled] = TRUE
+
+  # add backward edges (we always create symmetric graphs)
+  edges.sampled = cbind(edges.sampled[, 2L], edges.sampled[, 1L])
+  adj.mat[edges.sampled] = TRUE
+
+  return(list(adj.mat = adj.mat, generator = "EREG"))
 }
 
 #' @export
