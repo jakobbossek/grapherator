@@ -17,7 +17,7 @@
 #' @family graph generators
 #' @template ret_grapherator
 #' @export
-addEdges = function(graph, generator, type = "all", ...) { # nocov start
+addEdges = function(graph, generator, type = "all", ...) {
   assertClass(graph, "grapherator")
   assertFunction(generator)
   assertChoice(type, choices = c("all", "intercluster", "intracluster"))
@@ -81,4 +81,4 @@ addEdges = function(graph, generator, type = "all", ...) { # nocov start
   graph$edge.types = c(graph$edge.types, edge.type)
   graph$degree = rowSums(graph$adj.mat, na.rm = TRUE)
   return(graph)
-} # nocov end
+}

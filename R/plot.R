@@ -167,7 +167,8 @@ plot.grapherator = function(x, y = NULL,
   return(list(pl.coords = pl.coords, pl.weights = pl.weights))
 }
 
-addEdgesToPlot = function(x, g, edge.list) {
+# experimental
+addEdgesToPlot = function(x, g, edge.list) {  # nocov start
   assertClass(x, "ggplot")
   assertMatrix(edge.list, nrows = 2L, min.cols = 1L, any.missing = FALSE, all.missing = FALSE)
 
@@ -188,4 +189,4 @@ addEdgesToPlot = function(x, g, edge.list) {
   }
 
   x + geom_segment(data = edges, aes_string(x = "x1", y = "y1", xend = "x2", yend = "y2"), colour = "tomato")
-}
+}  # nocov end
