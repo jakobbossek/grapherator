@@ -1,0 +1,36 @@
+---
+title: "Using magrittr pipes"
+author: "Jakob Bossek"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Using magrittr pipes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>", warning = FALSE, message = FALSE, fig.align = "center")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+```
+
+# Improving code readability
+
+Since each generator function expects the graph object as its first argument one can make use of the fantastic [magrittr pipes](https://CRAN.R-project.org/package=magrittr) to improve reading.
+See the documentation of the *magrittr* package for details on the forward-pipe operator.
+
+```{r, fig.width=8, fig.height=4.2, out.width='100%', fig.cap='Example network.'}
+library(grapherator)
+library(magrittr)
+
+set.seed(1) # reproducability
+g = graph(lower = 0, upper = 10) %>%
+  addNodes(n = 20, generator = addNodesUniform) %>%
+  addEdges(generator = addEdgesComplete) %>%
+  addWeights(generator = addWeightsRandom, method = runif, min = 5, max = 10) %>%
+  addWeights(generator = addWeightsRandom, method = runif, min = 5, max = 10)
+print(g)
+do.call(gridExtra::grid.arrange, c(plot(g), list(nrow = 1)))
+```

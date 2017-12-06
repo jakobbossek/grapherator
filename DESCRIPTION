@@ -23,7 +23,8 @@ Suggests:
     testthat (>= 0.9.1),
     knitr,
     rmarkdown,
-    gridExtra
+    gridExtra,
+    magrittr
 ByteCompile: yes
 LazyData: yes
 RoxygenNote: 6.0.1
