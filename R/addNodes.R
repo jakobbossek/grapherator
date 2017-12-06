@@ -112,7 +112,8 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
     # concatenate coordinates
     coords = do.call(rbind, coords)
     # assign membership (we know which cluster belongs to which center)
-    membership = rep(1:nc, each = n[1L])
+
+    membership = rep(1:nc, n)
   }
   # update meta data of graph
   graph$n.nodes = if (!is.null(graph$n.nodes)) graph$n.nodes + sum(n) else sum(n)
