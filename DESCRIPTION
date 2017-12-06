@@ -1,6 +1,6 @@
 Package: grapherator
 Title: A modular multi-step graph generator
-Description: Useful for constructing benchmark graphs for benchmarking single- and multi-objective graph algorithms.
+Description: Functions to construct graphs for benchmarking single- and multi-objective graph algorithms.
 Version: 1.0.0
 Encoding: UTF-8
 Date: 2017-12-04
