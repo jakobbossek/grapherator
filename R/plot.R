@@ -15,6 +15,11 @@
 #'   Display edges? Keep in mind, that the number of edges is \eqn{O(n^2)}
 #'   where \eqn{n} is the number of nodes.
 #'   Default is \code{TRUE}.
+#' @param weight.plot.type [\code{character(1)}]\cr
+#'   Type of visualization which should be used for weights in case \code{x} has only
+#'   as single weight attached to each edge. Either \dQuote{histogram} or \dQuote{eadf}
+#'   (empirical distribution function) are possible choices.
+#'   Default is \code{histogram}.
 #' @param ... [any]\cr
 #'   Not used at the moment.
 #' @param x [\code{grapherator}]\cr
@@ -24,10 +29,14 @@
 #' \code{pl.weights} (scatterplot of edge weights) and eventually \code{pl.coords} (scatterplot of
 #' nodes). The latter is \code{NULL}, if \code{graph} has no associated coordinates.
 #' @export
-plot.grapherator = function(x, y = NULL, show.cluster.centers = TRUE, highlight.clusters = FALSE, show.edges = TRUE, ...) {
+plot.grapherator = function(x, y = NULL,
+  show.cluster.centers = TRUE, highlight.clusters = FALSE, show.edges = TRUE,
+  weight.plot.type = "histogram",
+  ...) {
   assertFlag(show.cluster.centers)
   assertFlag(highlight.clusters)
   assertFlag(show.edges)
+  assertChoice(weight.plot.type, choices = c("histogram", "eadf"))
 
   # extract data
   n.nodes = x$n.nodes
@@ -92,7 +101,24 @@ plot.grapherator = function(x, y = NULL, show.cluster.centers = TRUE, highlight.
   }
 
   pl.weights = NULL
-  if (length(x$weights) > 0L) {
+  if (x$n.weights == 1L) {
+    weights1 = x$weights[[1L]]
+
+    # do not show high values
+    if (!is.null(x$adj.mat)) {
+      weights1[x$adj.mat == 0] = NA
+    }
+
+    weights1 = as.numeric(weights1[upper.tri(weights1)])
+
+    dd = data.frame(w1 = weights1)
+    if (weight.plot.type == "histogram")
+      pl.weights = ggplot2::ggplot(dd, aes_string(x = "w1", y = "..density..")) + ggplot2::geom_histogram()
+    else
+      pl.weights = ggplot2::ggplot(dd, aes_string(x = "w1")) + ggplot2::stat_ecdf()
+    pl.weights = pl.weights + ggplot2::ggtitle("Edge weights", subtitle = collapse(paste(names(dd), x$weight.types, sep = " : "), sep = ", "))
+    pl.weights = pl.weights + xlab(expression(w[1])) + ylab("Freq.")
+  } else if (x$n.weights == 2L) {
     weights1 = x$weights[[1L]]
     weights2 = x$weights[[2L]]
 
