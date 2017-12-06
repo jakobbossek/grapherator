@@ -79,5 +79,6 @@ addEdges = function(graph, generator, type = "all", ...) { # nocov start
   }
   graph$n.edges = sum(graph$adj.mat[upper.tri(graph$adj.mat)])
   graph$edge.types = c(graph$edge.types, edge.type)
+  graph$degree = rowSums(graph$adj.mat, na.rm = TRUE)
   return(graph)
 } # nocov end

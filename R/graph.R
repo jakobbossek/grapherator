@@ -34,6 +34,7 @@ graph = function(lower, upper) {
     node.types = character(0L),
     edge.types = character(0L),
     weight.types = character(0L),
+    degrees = NULL,
     weights = list(),
     membership = NULL,
     coordinates = NULL,
