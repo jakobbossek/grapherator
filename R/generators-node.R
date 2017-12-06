@@ -72,11 +72,8 @@ addNodesTriangular = function(n, lower, upper) {
   # determine offset of each second line
   d = (upper[1] - lower[1]) / (m - 1)
   d = d / 2
-  print(d)
-  print(m)
   offset = rep(c(rep(0, m), rep(d, m)), m)[1:n]
-  print(offset)
-  coords = addNodesGrid(n, lower, upper)
+  coords = addNodesGrid(n, lower, upper)$coords
   coords[, 1L] = coords[, 1L] + offset
   return(list(coords = coords, generator = "TNG"))
 }

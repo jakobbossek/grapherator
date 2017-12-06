@@ -1,5 +1,53 @@
 context("graph generators")
 
+test_that("node generators work:", {
+  g = graph(0, 100)
+  n = 25L
+
+  node.setups = list(
+    list(generator = addNodesUniform, pars = list()),
+    list(generator = addNodesLHS, pars = list()),
+    list(generator = addNodesGrid, pars = list()),
+    list(generator = addNodesTriangular, pars = list()),
+    list(generator = addNodesNormal, pars = list(x.mean = 50, y.mean = 50, x.sd = 3, y.sd = 1))
+  )
+
+  for (node.setup in node.setups) {
+    node.generator = node.setup$generator
+    pars = c(list(graph = g, n = n, generator = node.generator), node.setup$pars)
+    g1 = do.call(addNodes, pars)
+    expect_equal(getNumberOfNodes(g1), n)
+    expect_true(all(g1$coordinates >= 0))
+  }
+})
+
+test_that("edge generators work:", {
+  g = graph(0, 100)
+  n = 25L
+  g = addNodes(g, n = n, generator = addNodesUniform)
+
+  edge.setups = list(
+    list(generator = addEdgesDelauney, pars = list()),
+    list(generator = addEdgesWaxman, pars = list(alpha = 0.3, beta = 0.1)),
+    list(generator = addEdgesGilbert, pars = list(p = 0.3)),
+    list(generator = addEdgesErdosRenyi, pars = list(m = floor(n / 2 - 4))),
+    list(generator = addEdgesSpanningTree, pars = list(runs = 3L)),
+    list(generator = addEdgesComplete, pars = list()),
+    #list(generator = addEdgesOnion, pars = list()),
+    list(generator = addEdgesGrid, pars = list())
+  )
+
+  for (edge.setup in edge.setups) {
+    edge.generator = edge.setup$generator
+    pars = c(list(graph = g, generator = edge.generator), edge.setup$pars)
+    g1 = do.call(addEdges, pars)
+    adj.mat = getAdjacencyMatrix(g1)
+    expect_true(!is.null(adj.mat))
+    expect_true(isSymmetricMatrix(adj.mat))
+    expect_true(all(diag(adj.mat) == 0))
+  }
+})
+
 test_that("graph generation: simple 2o graph", {
   # here we generate a complex biobjective graph problem
   # with both euclidean and random weights

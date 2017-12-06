@@ -178,6 +178,11 @@ addEdgesGilbert = function(graph, p, ...) {
 
   n = getNumberOfNodes(graph)
   adj.mat = matrix(runif(n * n), nrow = n) < p
+  diag(adj.mat) = 0
+
+  # assure symmetric edges
+  adj.mat[lower.tri(adj.mat)] = t(adj.mat)[lower.tri(t(adj.mat))]
+
   return(list(adj.mat = adj.mat, generator = "GilEG"))
 }
 
