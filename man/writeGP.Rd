@@ -41,3 +41,15 @@ i,j,w1(i,j),...,wp(i,j)
 I.e., each two node numbers i and j followed by the p weights of the edge
 (i, j).
 }
+\examples{
+g = graph(0, 100)
+g = addNodes(g, n = 25, generator = addNodesGrid)
+g = addEdges(g, generator = addEdgesGrid)
+g = addWeights(g, generator = addWeightsRandom, method = runif, min = 5, max = 100, to.int = TRUE)
+g = addWeights(g, generator = addWeightsRandom, method = runif, min = 10, max = 100, to.int = TRUE)
+\dontrun{
+writeGP(g, file = "myGraph.graph")
+g2 = readGP(file = "myGraph.graph")
+do.call(gridExtra::grid.arrange, c(plot(g), plot(g2), list(nrow = 2)))
+}
+}

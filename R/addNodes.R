@@ -36,13 +36,17 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
   assertClass(graph, "grapherator")
 
   if (graph$n.edges > 0L)
-    stopf("addEdges: add nodes before adding edges.")
+    stopf("grapherator::addNodes: add nodes before adding edges.")
 
   if (!is.null(coordinates)) {
     assertMatrix(coordinates, mode = "numeric", min.rows = 1L, ncols = 2L, any.missing = FALSE, all.missing = FALSE)
     n = nrow(coordinates)
   }
-  n = asInt(n, lower = 1L)
+  assertIntegerish(n, lower = 1L, min.len = 1L)
+  if (length(n) > 1L) {
+    if (length(n) != graph$n.nodes)
+      stopf("grapherator::addNodes: n should be a single integer or a vector of graph$n.nodes integers.")
+  }
   assertFlag(by.centers)
   assertFunction(par.fun, null.ok = TRUE)
 
@@ -84,7 +88,7 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
     # currently we allow only one "level" of clustering
     # thus we can set the membership here already
     graph$membership = 1:nc
-    n = rep(n, nc)
+    n = if (length(n) == 1L) rep(n, nc) else n
     node.type = NULL
     coords = vector(mode = "list", length = nc)
     for (i in seq_len(nc)) {

@@ -16,6 +16,7 @@ S3 object describing a graph with the following fields:
   \item{edge.types [\code{character}]}{Character vector describing the node generators used to create edges.}
   \item{weight.types [\code{character}]}{Character vector describing the node generators used to create weights.}
   \item{weights [\code{list} of \code{matrix}]}{List of weight/distance/cost matrizes.}
+  \item{degree [\code{integer}]}{Integer vector of node degrees.}
   \item{membership [\code{integer} | \code{NULL}]}{Integer vector which stores the cluster membership of each node. Not \code{NULL} only if graph is clustered.}
   \item{coordinates [\code{matrix(n.nodes, 2)}]}{Matrix of node coordinates. Each row contains the node coordinates of one node.}
 }

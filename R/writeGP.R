@@ -24,6 +24,17 @@
 #'   or which contains the graph to be imported (for \code{link{readGP}}).
 #' @return Function \code{\link{writeGP}} silently returns the passed filename
 #' \code{file} whereas \code{\link{writeGP}} returns a \code{grapherator} object.
+#' @examples
+#' g = graph(0, 100)
+#' g = addNodes(g, n = 25, generator = addNodesGrid)
+#' g = addEdges(g, generator = addEdgesGrid)
+#' g = addWeights(g, generator = addWeightsRandom, method = runif, min = 5, max = 100, to.int = TRUE)
+#' g = addWeights(g, generator = addWeightsRandom, method = runif, min = 10, max = 100, to.int = TRUE)
+#' \dontrun{
+#' writeGP(g, file = "myGraph.graph")
+#' g2 = readGP(file = "myGraph.graph")
+#' do.call(gridExtra::grid.arrange, c(plot(g), plot(g2), list(nrow = 2)))
+#' }
 #' @rdname writeGP
 #' @name writeGP
 #' @export

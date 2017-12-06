@@ -1,9 +1,9 @@
-#' @title Visualize bi-objective graph.
+#' @title Visualize graph.
 #'
-#' @description Only applicable for graph with exactly two weights per edge.
-#' \code{plot.grapherator} generates a scatterplot of edge weights. If the nodes do
-#' have coordinates, additionally a scatterplot of the nodes in the Euclidean
-#' plane is generated.
+#' @description \code{plot.grapherator} generates a scatterplot of the nodes in the
+#' Euclidean plane. Additionally, the edge weights are visualized. In case of one
+#' weight per edge either a histogram or an empirical distribution function is drawn.
+#' For graphs with two weights per edge a scatterplot is used.
 #'
 #' @param show.cluster.centers [\code{logical(1)}]\cr
 #'   Display cluster centers?
@@ -17,7 +17,7 @@
 #'   Default is \code{TRUE}.
 #' @param weight.plot.type [\code{character(1)}]\cr
 #'   Type of visualization which should be used for weights in case \code{x} has only
-#'   as single weight attached to each edge. Either \dQuote{histogram} or \dQuote{eadf}
+#'   as single weight attached to each edge. Either \dQuote{histogram} or \dQuote{ecdf}
 #'   (empirical distribution function) are possible choices.
 #'   Default is \code{histogram}.
 #' @param ... [any]\cr
@@ -28,6 +28,32 @@
 #' @return [\code{list}] A list of \code{\link[ggplot2]{ggplot}} objects with components
 #' \code{pl.weights} (scatterplot of edge weights) and eventually \code{pl.coords} (scatterplot of
 #' nodes). The latter is \code{NULL}, if \code{graph} has no associated coordinates.
+#' @examples
+#' g = graph(0, 100)
+#' g = addNodes(g, n = 25, generator = addNodesGrid)
+#' g = addEdges(g, generator = addEdgesDelauney)
+#' g = addWeights(g, generator = addWeightsDistance, method = "manhattan")
+#' \dontrun{
+#' pls = plot(g, weight.plot.type = "ecdf")
+#' }
+#'
+#' g = addWeights(g, generator = addWeightsRandom,
+#'   method = rpois, lambda = 0.1)
+#' \dontrun{
+#' pls = plot(g, show.edges = FALSE)
+#' }
+#'
+#' g = graph(0, 100)
+#' g = addNodes(g, n = 25, generator = addNodesGrid)
+#' g = addNodes(g, n = 9, by.centers = TRUE, generator = addNodesGrid,
+#'   lower = c(0, 0), upper = c(7, 7))
+#' g = addEdges(g, generator = addEdgesDelauney)
+#' g = addWeights(g, generator = addWeightsCorrelated, rho = -0.8)
+#' \dontrun{
+#' do.call(gridExtra::grid.arrange, plot(g, show.edges = FALSE))
+#' do.call(gridExtra::grid.arrange, plot(g, show.edges = TRUE,
+#'   show.cluster.centers = FALSE))
+#' }
 #' @export
 plot.grapherator = function(x, y = NULL,
   show.cluster.centers = TRUE, highlight.clusters = FALSE, show.edges = TRUE,
@@ -36,7 +62,7 @@ plot.grapherator = function(x, y = NULL,
   assertFlag(show.cluster.centers)
   assertFlag(highlight.clusters)
   assertFlag(show.edges)
-  assertChoice(weight.plot.type, choices = c("histogram", "eadf"))
+  assertChoice(weight.plot.type, choices = c("histogram", "ecdf"))
 
   # extract data
   n.nodes = x$n.nodes
