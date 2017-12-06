@@ -1,0 +1,23 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0002-4121-4668",
+      "@type": "Person",
+      "email": "j.bossek@gmail.com",
+      "name": "Jakob Bossek",
+      "affiliation": "University of Münster"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/jakobbossek/grapherator",
+  "datePublished": "2017-12-06",
+  "dateModified": "2017-12-06",
+  "dateCreated": "2017-12-06",
+  "description": "Functions to construct graphs for benchmarking single- and multi-objective graph algorithms",
+  "keywords": "software, r, combinatorial optimization, graph problems",
+  "license": "BSD2",
+  "title": "A modular multi-step graph generator",
+  "version": "v1.0.0"
+}
