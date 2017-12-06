@@ -33,7 +33,7 @@ test_that("edge generators work:", {
     list(generator = addEdgesErdosRenyi, pars = list(m = floor(n / 2 - 4))),
     list(generator = addEdgesSpanningTree, pars = list(runs = 3L)),
     list(generator = addEdgesComplete, pars = list()),
-    #list(generator = addEdgesOnion, pars = list()),
+    list(generator = addEdgesOnion, pars = list()),
     list(generator = addEdgesGrid, pars = list())
   )
 
@@ -71,13 +71,20 @@ test_that("weight generators work:", {
   }
 })
 
-test_that("graph generation: simple 2o graph", {
+test_that("graph generation: simple graph", {
   # here we generate a complex biobjective graph problem
   # with both euclidean and random weights
 
   g = graph(lower = 0, upper = 100)
   g = addNodes(g, n = 50L, generator = addNodesUniform)
   g = addWeights(g, generator = addWeightsDistance, method = "euclidean", symmetric = TRUE)
+  # check if plotting works
+  pls = plot(g)
+  expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
+  pls = plot(g, weight.plot.type = "ecdf")
+  expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
+
+  # add additional weight
   g = addWeights(g, generator = addWeightsRandom, method = runif, symmetric = TRUE)
 
   expect_class(g, "grapherator")

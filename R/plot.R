@@ -119,7 +119,7 @@ plot.grapherator = function(x, y = NULL,
     }
 
     pl.coords = pl.coords +
-      ggplot2::ggtitle("Network topology", subtitle = sprintf("#nodes: %i, #edges: %i, #clusters: %i\nNode type(s): %s, edge type(s): %s", n.nodes, n.edges, n.clusters, collapse(x$node.types, ", "), collapse(x$edge.types, ", ")))
+      ggplot2::ggtitle("Graph topology", subtitle = sprintf("#nodes: %i, #edges: %i, #clusters: %i\nNode type(s): %s, edge type(s): %s", n.nodes, n.edges, n.clusters, collapse(x$node.types, ", "), collapse(x$edge.types, ", ")))
     pl.coords = pl.coords +
       ggplot2::xlab(expression(x[1])) +
       ggplot2::ylab(expression(x[2]))
@@ -142,7 +142,8 @@ plot.grapherator = function(x, y = NULL,
       pl.weights = ggplot2::ggplot(dd, aes_string(x = "w1", y = "..density..")) + ggplot2::geom_histogram()
     else
       pl.weights = ggplot2::ggplot(dd, aes_string(x = "w1")) + ggplot2::stat_ecdf()
-    pl.weights = pl.weights + ggplot2::ggtitle("Edge weights", subtitle = collapse(paste(names(dd), x$weight.types, sep = " : "), sep = ", "))
+    pl.weights = pl.weights + ggplot2::ggtitle("Edge weights", subtitle =
+      sprintf("#weights: %i\nWeight type(s): %s", n.weights, collapse(x$weight.types, ", ")))
     pl.weights = pl.weights + xlab(expression(w[1])) + ylab("Freq.")
   } else if (x$n.weights == 2L) {
     weights1 = x$weights[[1L]]
@@ -159,8 +160,8 @@ plot.grapherator = function(x, y = NULL,
 
     dd = data.frame(w1 = weights1, w2 = weights2)
     pl.weights = ggplot2::ggplot(dd, aes_string(x = "w1", y = "w2")) + ggplot2::geom_point()
-    pl.weights = pl.weights +
-      ggplot2::ggtitle("Edge weights", subtitle = collapse(paste(names(dd), x$weight.types, sep = " : "), sep = ", "))
+    pl.weights = pl.weights + ggplot2::ggtitle("Edge weights", subtitle =
+      sprintf("#weights: %i\nWeight type(s): %s", n.weights, collapse(x$weight.types, ", ")))
     pl.weights = pl.weights + xlab(expression(w[1])) + ylab(expression(w[2]))
   }
 

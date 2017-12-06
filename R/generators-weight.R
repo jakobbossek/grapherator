@@ -118,7 +118,7 @@ addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
     ww2[!graph$adj.mat] = 1e6
   }
 
-  return(list(weights = list(ww1, ww2), generator = "concave"))
+  return(list(weights = list(ww1, ww2), generator = "CONC"))
 }
 
 #' @export
@@ -157,7 +157,7 @@ addWeightsCorrelated = function(graph, rho, ...) {
     Y[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
   }
 
-  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-correlated", rho)))
+  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-COR", rho)))
 }
 
 #' @export
@@ -174,7 +174,7 @@ addWeightsDistance = function(graph, method, ...) {
   if (!is.null(graph$adj.mat))
     ww[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
 
-  return(list(weights = list(ww), generator = sprintf("distance-%s", method)))
+  return(list(weights = list(ww), generator = sprintf("DIST", method)))
 }
 
 #' @export
@@ -195,5 +195,5 @@ addWeightsRandom = function(graph, method, ...) {
   if (!is.null(graph$adj.mat))
     ww[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
 
-  return(list(weights = list(ww), generator = "random"))
+  return(list(weights = list(ww), generator = "RND"))
 }
