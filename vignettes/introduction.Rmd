@@ -36,7 +36,7 @@ knitr::include_graphics("grapherator_workflow.png")
 
 The following code supports the workflow diagram with a first example. Here we generate a complete graph with n = 20 nodes placed uniformly at random in the square [0, 10] x [0, 10]. Two weights are assigned to each edge (both weights are drawn from a U(5, 10)-distribution).
 
-```{r, fig.width=8, out.width='100%', fig.cap='Example network.'}
+```{r, fig.width=8, fig.height=4.2, out.width='100%', fig.cap='Example network.'}
 library(grapherator)
 set.seed(1) # reproducability
 g = graph(lower = 0, upper = 10)
@@ -68,11 +68,13 @@ For each step there exist several preimplemented generator functions which are p
 1. **Random weight generator**: Edge weights are assigned randomly following a parameterizable probability distribution.
 2. **Correlated weight generator**: Generates two weights per edge. The first weight corresponds to the Euclidean distance between the nodes. The second weight is generated in a way, that both weights are correlated with a predefined correlation rho.
 
+Custom generators are possible. See the [HowTo on custom generators](custom_generators.html) for an example.
+
 ## Examples
 
 Here, 50 nodes are placed uniformly at random in the square [0, 100] x [0, 100]. Edges are based on a Delauney triangulation. Both weights are random. The first weight is sampled from a uniform distribution U(10, 20), the second one follows a Gaussian distribution N(10, 2).
 
-```{r, fig.width=8, out.width='100%', fig.cap='Example network.'}
+```{r, fig.width=8, fig.height=4.2, out.width='100%', fig.cap='Example network.'}
 library(grapherator)
 set.seed(1) # reproducability
 g = graph(lower = 0, upper = 100)
@@ -86,7 +88,7 @@ do.call(gridExtra::grid.arrange, c(plot(g), list(nrow = 1L)))
 
 In the following example a clustered graph with 7 clusters is generated. Cluster centers are based on a min-max Latin-Hypercube-Sample (LHS). In a subsequent step, each 29 further points are added to each cluster by samling from a uniform distribution U(0, 5) around the cluster center. Edges are based on Waxman's model with parameters alpha = 0.3, beta = 0.1. Weights are correlated with negative correlation rho = -0.7.
 
-```{r, fig.width=8, out.width='100%', fig.cap='Example network.'}
+```{r, fig.width=8, fig.height=4.2, out.width='100%', fig.cap='Example network.'}
 library(grapherator)
 set.seed(1) # reproducability
 g = graph(lower = 0, upper = 100)
@@ -100,7 +102,7 @@ do.call(gridExtra::grid.arrange, c(plot(g), list(nrow = 1L)))
 
 The last example is a another clustered network. Here, 5 cluster centers are placed manually by providing the center coordinates. Next, each cluster is crowded with 10 nodes by sampling node coordinates from a N(1, 0.2)-distribution each. Edges are added in two steps: first we add edges for each cluster seperately at random. In addition -- to ensure connectivity -- we add edges with the spanning tree edge generator. Next, the cluster centers are linked with another generator. The first weight is the Manhattan distance between the nodes in the plane. The second follows an exponential distribution with rate = 0.1.
 
-```{r, fig.width=8, out.width='100%', fig.cap='Example network.'}
+```{r, fig.width=8, fig.height=4.2, out.width='100%', fig.cap='Example network.'}
 library(grapherator)
 set.seed(1) # reproducability
 g = graph(lower = 0, upper = 100)
