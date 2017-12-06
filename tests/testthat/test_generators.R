@@ -48,6 +48,29 @@ test_that("edge generators work:", {
   }
 })
 
+test_that("weight generators work:", {
+  g = graph(0, 100)
+  n = 25L
+  g = addNodes(g, n = n, generator = addNodesUniform)
+  g = addEdges(g, generator = addEdgesDelauney)
+
+  weight.setups = list(
+    list(generator = addWeightsRandom, pars = list(method = rexp, rate = 0.1)),
+    list(generator = addWeightsDistance, pars = list(method = "minkowski", p = 3)),
+    list(generator = addWeightsCorrelated, pars = list(rho = 0.4)),
+    list(generator = addWeightsConcave, pars = list(xhi = 10, nu = 19, M = 1000))
+  )
+
+  for (weight.setup in weight.setups) {
+    weight.generator = weight.setup$generator
+    pars = c(list(graph = g, generator = weight.generator), weight.setup$pars)
+    g1 = do.call(addWeights, pars)
+    expect_true(length(g1$weights) > 0L)
+    expect_true(all(sapply(g1$weights, function(w) all(dim(w) == n))))
+    expect_true(all(sapply(g1$weights, isSymmetricMatrix)))
+  }
+})
+
 test_that("graph generation: simple 2o graph", {
   # here we generate a complex biobjective graph problem
   # with both euclidean and random weights
