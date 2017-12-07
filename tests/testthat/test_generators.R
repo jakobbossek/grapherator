@@ -91,7 +91,7 @@ test_that("graph generation: simple graph", {
   expect_true(g$n.nodes == 50L)
   expect_true(g$n.clusters == 0L)
   expect_true(g$n.weights == 2L)
-  expect_set_equal(g$weight.types, c("distance-euclidean", "random"))
+  expect_set_equal(g$weight.types, c("DIST", "RND"))
   expect_true(isSymmetricMatrix(g$weights[[1L]]))
   expect_true(isSymmetricMatrix(g$weights[[2L]]))
   expect_output(print(g), regexp = "GRAPH")
