@@ -174,7 +174,7 @@ addWeightsDistance = function(graph, method, ...) {
   if (!is.null(graph$adj.mat))
     ww[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
 
-  return(list(weights = list(ww), generator = sprintf("DIST", method)))
+  return(list(weights = list(ww), generator = "DIST"))
 }
 
 #' @export

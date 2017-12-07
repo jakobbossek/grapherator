@@ -45,7 +45,6 @@
 #' @export
 addNodesLHS = function(n, lower = 0, upper = 1, method = NULL) {
   if (is.null(method)) {
-    requirePackages("lhs", why = "mcMST::addNodesLHS", default.method = "load")
     method = lhs::maximinLHS
   }
 
