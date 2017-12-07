@@ -88,8 +88,8 @@ addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
 
   ns = c(n1, n2, n3)
 
-  ww1 = matrix(1e6, nrow = n, ncol = n)
-  ww2 = matrix(1e6, nrow = n, ncol = n)
+  ww1 = matrix(Inf, nrow = n, ncol = n)
+  ww2 = matrix(Inf, nrow = n, ncol = n)
 
   for (i in 1:n) {
     for (j in 1:n) {
@@ -114,8 +114,8 @@ addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
   }
 
   if (!is.null(graph$adj.mat)) {
-    ww1[!graph$adj.mat] = 1e6
-    ww2[!graph$adj.mat] = 1e6
+    ww1[!graph$adj.mat] = Inf
+    ww2[!graph$adj.mat] = Inf
   }
 
   return(list(weights = list(ww1, ww2), generator = "CONC"))
@@ -153,8 +153,8 @@ addWeightsCorrelated = function(graph, rho, ...) {
   diag(Y) = 0
 
   if (!is.null(graph$adj.mat)) {
-    ww.euc[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
-    Y[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
+    ww.euc[!graph$adj.mat] = Inf
+    Y[!graph$adj.mat] = Inf
   }
 
   return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-COR", rho)))
@@ -172,7 +172,7 @@ addWeightsDistance = function(graph, method, ...) {
   ww = as.matrix(dist(graph$coordinates, method = method, ...))
 
   if (!is.null(graph$adj.mat))
-    ww[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
+    ww[!graph$adj.mat] = Inf #FIXME: numeric infinity value
 
   return(list(weights = list(ww), generator = "DIST"))
 }
@@ -193,7 +193,7 @@ addWeightsRandom = function(graph, method, ...) {
   diag(ww) = .0
 
   if (!is.null(graph$adj.mat))
-    ww[!graph$adj.mat] = 1e6 #FIXME: numeric infinity value
+    ww[!graph$adj.mat] = Inf #FIXME: numeric infinity value
 
   return(list(weights = list(ww), generator = "RND"))
 }

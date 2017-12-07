@@ -127,7 +127,7 @@ readGP = function(file) {
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
   weights = vector(mode = "list", length = p)
   for (i in seq_len(p)) {
-    weights[[i]] = matrix(10000, nrow = n, ncol = n)
+    weights[[i]] = matrix(Inf, nrow = n, ncol = n)
   }
 
   for (k in seq_len(m)) {

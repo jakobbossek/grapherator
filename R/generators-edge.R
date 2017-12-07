@@ -122,7 +122,6 @@ addEdgesOnion = function(graph, ...) {
     if (sum(coords.done) == n)
       break
   }
-  print(n.edges)
   return(list(adj.mat = adj.mat, generator = "OEG"))
 }
 
@@ -200,7 +199,6 @@ addEdgesErdosRenyi = function(graph, m, ...) {
   # sample m edges without replacement
   edges.sampled = sample(1:nrow(edges.possible), size = m)
   edges.sampled = edges.possible[edges.sampled, , drop = FALSE]
-  print(edges.sampled)
 
   # init empty adjacency matrix
   adj.mat = matrix(FALSE, ncol = n, nrow = n)
