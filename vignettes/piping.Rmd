@@ -4,6 +4,7 @@ author: "Jakob Bossek"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
+    toc: true
     fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{Using magrittr pipes}

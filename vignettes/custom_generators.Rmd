@@ -4,6 +4,7 @@ author: "Jakob Bossek"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
+    toc: true
     fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{HowTo build custom generators}
@@ -18,9 +19,9 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 
 # Custom generators
 
-The **graherator** package already implements several node, edge and weight generators respectively. However, the collection is not comprehensive. Therefore the user interface enables the definition of custom generators for each of the three steps (see [basic graph generation vignette](introduction.html)). A generator is a simple function myGenerator = function(graph, ...). The first argument needs to be a grapherator object. More argument are possible, but optional. Each generator must return a named list. The first field must be either *coords* (matrix of node coordinates) for node generators, *adj.mat* (logical matrix defining the adjacency matrix) or *weights* (numeric matrix of weights or list of numeric matrizes) for weight generators respectively. The second field is named *generator* and contains a short string representation of the generator, e.g., DEG for **D**elauney **E**dge **G**enerator.
+The **graherator** package already provides several node, edge and weight generators respectively. However, the collection is by far not complete and it does not aim to be. Therefore the user interface enables the definition of custom generators for each of the three steps (see [basic graph generation vignette](introduction.html)). A generator is a simple function myGenerator = function(graph, ...). The first argument needs to be a grapherator object. More arguments are possible, but optional. Each generator must return a named list. The first field must be either *coords* (matrix of node coordinates) for node generators, *adj.mat* (logical matrix defining the adjacency matrix) or *weights* (numeric matrix of weights or list of numeric matrices) for weight generators respectively. The second field is named *generator* and contains a short string representation of the generator, e.g., DEG for **D**elauney **E**dge **G**enerator.
 
-In the following we demonstrate the definition of a custom edge generator, namely the *Threshold Edge Generator*. Given a graph and a positive numeric argument *threshold* this edge generator computes the pairwise Euclidean distances between the nodes and keeps only the edges with distance below the threshold value.
+In the following we demonstrate the definition of a custom edge generator, namely the *Threshold Edge Generator*. Given a graph and a positive numeric argument *threshold* this edge generator computes the pairwise Euclidean distances between the nodes and only keeps the edges whose distance is below the threshold value.
 
 ```{r}
 library(grapherator)
