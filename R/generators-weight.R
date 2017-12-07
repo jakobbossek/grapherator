@@ -106,12 +106,14 @@ addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
       } else if (i == n1 & j == n3) {
         ww1[i, j] = 1
         ww2[i, j] = M - xhi
-      } else if (i == n2 & j == n3) {
+      } else {#} (i == n2 & j == n3) {
         ww1[i, j] = M - xhi
         ww2[i, j] = 1
       }
     }
   }
+
+  #diag(ww1) = diag(ww2) = 0
 
   if (!is.null(graph$adj.mat)) {
     ww1[!graph$adj.mat] = Inf

@@ -87,6 +87,7 @@ addEdgesGrid = function(graph, ...) {
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
   # we need to add a small constant here
   adj.mat[euc.dists <= min.dist + 1e-10] = TRUE
+  diag(adj.mat) = FALSE
   return(list(adj.mat = adj.mat, generator = "GEG"))
 }
 
@@ -177,7 +178,7 @@ addEdgesGilbert = function(graph, p, ...) {
 
   n = getNumberOfNodes(graph)
   adj.mat = matrix(runif(n * n), nrow = n) < p
-  diag(adj.mat) = 0
+  diag(adj.mat) = FALSE
 
   # assure symmetric edges
   adj.mat[lower.tri(adj.mat)] = t(adj.mat)[lower.tri(t(adj.mat))]
@@ -237,7 +238,7 @@ addEdgesSpanningTree = function(graph, runs = 1L, ...) {
     # set edges
     for (i in 1:(n - 1L)) {
       adj.mat[edges[i, 1L], edges[i, 2L]] = adj.mat[edges[i, 2L], edges[i, 1L]] = TRUE
-      dist.mat[edges[i, 1L], edges[i, 2L]] = dist.mat[edges[i, 2L], edges[i, 1L]] = NA
+      dist.mat[edges[i, 1L], edges[i, 2L]] = dist.mat[edges[i, 2L], edges[i, 1L]] = Inf
     }
   }
 
