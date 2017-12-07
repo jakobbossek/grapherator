@@ -20,7 +20,7 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 
 # Introduction
 
-Benchmarking algorithms [@R] @W88 for (combinatorial) optimization problems is usually carried out by running the set of algorithms on a set of test problems. Often, due to a lack of real-world data, the test set consists of artificially generated benchmark problems. Artificial problems allow for 1) the generation of arbitrary many instances in short time and 2) the generation of problems of different hardness levels by implementing theoretical knowledge.
+Benchmarking algorithms for (combinatorial) optimization problems is usually carried out by running the set of algorithms on a set of test problems. Often, due to a lack of real-world data, the test set consists of artificially generated benchmark problems. Artificial problems allow for 1) the generation of arbitrary many instances in short time and 2) the generation of problems of different hardness levels by implementing theoretical knowledge.
 
 # Grapherator workflow
 
