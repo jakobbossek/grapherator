@@ -72,10 +72,13 @@ Contributions to this software package are welcome via [pull requests](https://h
 
 ## Related work
 
-The following packages provide some methods to generate random graphs:
+The following R packages provide some methods to generate random graphs:
 
 * [igraph: Network Analysis and Visualization](https://cran.r-project.org/package=igraph) Includes some methods to generate classical Erdos-Renyi random graphs as well as more recent models, e.g., small-world graphs.
 * [netgen: Network Generator for Combinatorial Graph Problems](https://cran.r-project.org/package=netgen) Contains some methods to generate complete graphs especially for benchmarking Travelling-Salesperson-Problem solvers.
 * [bnlearn: Bayesian Network Structure Learning, Parameter Learning and Inference](https://cran.r-project.org/web/packages/bnlearn/index.html) Function `bnlearn::random.graph` implements some algorithms to create graphs.
 
+More interesting libraries:
 
+* [Graphcuisine](http://www.aviz.fr/Research/Graphcuisine) Provides an interactive Evolutionary Algorithm to create random graphs with certain user-guided characteristics or maximal similarity to a given baseline graph.
+* [NetworkX](https://networkx.github.io) Powerful python package which provides many methods to generate classic and random networks.

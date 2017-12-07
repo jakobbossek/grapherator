@@ -2,6 +2,7 @@
 title: "Graph generation with grapherator"
 author: "Jakob Bossek"
 date: "`r Sys.Date()`"
+bibliography: paper.bib
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -19,7 +20,7 @@ options(tibble.print_min = 4L, tibble.print_max = 4L)
 
 # Introduction
 
-Benchmarking algorithms for (combinatorial) optimization problems is usually carried out by running the set of algorithms on a set of test problems. Often, due to a lack of real-world data, the test set consists of artificially generated benchmark problems. Artificial problems allow for 1) the generation of arbitrary many instances in short time and 2) the generation of problems of different hardness levels by implementing theoretical knowledge.
+Benchmarking algorithms [@R] @W88 for (combinatorial) optimization problems is usually carried out by running the set of algorithms on a set of test problems. Often, due to a lack of real-world data, the test set consists of artificially generated benchmark problems. Artificial problems allow for 1) the generation of arbitrary many instances in short time and 2) the generation of problems of different hardness levels by implementing theoretical knowledge.
 
 # Grapherator workflow
 
@@ -62,19 +63,19 @@ For each step there exist several preimplemented generator functions which are p
 
 ## Edge generators
 
-1. **Gilbert edge generator**: Each edge is added independently with some probability p. This way one can generate Gilbert-graphs G(n, p).
-2. **Erdos-Renyi edge generator**: m random edges are added.
+1. **Gilbert edge generator** [ER59]: Each edge is added independently with some probability p. This way one can generate Gilbert-graphs G(n, p).
+2. **Erdos-Renyi edge generator** [ER59]: m random edges are added.
 2. **Delauney edge generator**: The set of edges added to the graph is based on a Delauney triangulation of the node coordinates.
 3. **Complete edge generator**: All n(n-1)/2 edges are added.
-4. **Waxman edge generator**: Edges are added according to Waxman's prbablistic model.
+4. **Waxman edge generator** [@W88]: Edges are added according to Waxman's prbablistic model.
 5. **Onion edge generator**: The convex hull of the nodes in the Euclidean plane is computed and neighbouring nodes are linked. The process is repeated with the remaining nodes until all nodes are processed.
 6. **Spanning tree edge generator**: A full weight matrix with U(0, 1) distributed random weights is generated internally and a spanning tree is computed based on these weights. All edges of the spanning tree are added.
 
 ## Weight generators
 
 1. **Random weight generator**: Edge weights are assigned randomly following a parameterizable probability distribution.
-2. **Correlated weight generator**: Generates two weights per edge. The first weight corresponds to the Euclidean distance between the nodes. The second weight is generated in a way, that both weights are correlated with a predefined correlation rho.
-3. **Concave weight generator**: This is in particular useful for studying the behaviour of algorithms for the multi-criteria spanning tree problem, since the Pareto-front exhibits a concave shape if this weight generator is used to create the weights of the graph.
+2. **Correlated weight generator** [@KC01]: Generates two weights per edge. The first weight corresponds to the Euclidean distance between the nodes. The second weight is generated in a way, that both weights are correlated with a predefined correlation rho.
+3. **Concave weight generator** [@KC01]: This is in particular useful for studying the behaviour of algorithms for the multi-criteria spanning tree problem, since the Pareto-front exhibits a concave shape if this weight generator is used to create the weights of the graph.
 4. **Distance based generator**: Weights correspond to some distance metric between the nodes. Internally, the stats::dist function is called.
 
 Custom generators are possible. See the [HowTo on custom generators](custom_generators.html) for an example.
@@ -126,3 +127,5 @@ g = addWeights(g, generator = addWeightsRandom, method = rexp, rate = 0.1)
 print(g)
 do.call(gridExtra::grid.arrange, c(plot(g), list(nrow = 1L)))
 ```
+
+# References
