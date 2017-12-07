@@ -74,8 +74,8 @@ graph = function(lower, upper) {
 #' @export
 print.grapherator = function(x, ...) {
   catf("GRAPHERATOR GRAPH")
-  catf("#nodes:            %i", getNumberOfNodes(x))
-  catf("#edges:            %i", getNumberOfEdges(x))
+  catf("#nodes           : %i (%s)", getNumberOfNodes(x), BBmisc::collapse(x$node.types))
+  catf("#edges           : %i (%s)", getNumberOfEdges(x), BBmisc::collapse(x$edge.types))
   n.clusters = getNumberOfClusters(x)
   if (n.clusters > 0L)
     catf("#clusters:         %i", n.clusters)
