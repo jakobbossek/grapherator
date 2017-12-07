@@ -57,6 +57,9 @@ writeGP = function(graph, file) {
   node.types = collapse(graph$node.types, ",")
   cat(node.types, file = con, sep = "\n")
 
+  edge.types = collapse(graph$edge.types, ",")
+  cat(edge.types, file = con, sep = "\n")
+
   write.table(graph$coordinates, file = con, append = TRUE, sep = ",", row.names = FALSE, col.names = FALSE)
 
   # store membership in case the object is clustered
@@ -102,7 +105,8 @@ readGP = function(file) {
 
   # import weight and node types
   g$weight.types = strsplit(scan(con, what = character(), n = 1L, sep = ",", quiet = TRUE), ",")[[1L]]
-  g$node.types = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
+  g$node.types   = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
+  g$edge.types   = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
 
   # import coordinates
   g$coordinates = as.matrix(read.table(con, sep = ",", nrows = n, header = FALSE, stringsAsFactors = FALSE))
