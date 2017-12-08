@@ -46,4 +46,4 @@ do.call(gridExtra::grid.arrange, plot(g4))
 
 pls = c(plot(g1), plot(g2), plot(g3), plot(g4), list(ncol = 4L))
 pl = do.call(gridExtra::grid.arrange, pls)
-ggsave("paper/examples.png", plot = pl, width = 20, height = 11, dpi = 300)
+ggsave("paper/examples.pdf", plot = pl, width = 20, height = 11, dpi = 300)

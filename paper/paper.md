@@ -28,9 +28,9 @@ The `R` [@R] package [`grapherator`](https://github.com/jakobbossek/grapherator)
 
 The technical pipeline (see Figure 1) follows a three-step approach: 1) node generation (e.g., lattice, uniform etc.), 2) edge generation (e.g., Erdos-Renyi [@ER59], Waxman-model [@W88] etc.) and 3) weight generation (e.g., distance-based, random, correlated etc.). Each step may be repeated multiple times with different generator functions yielding high flexibility (see Figure 2 for some examples). The set of predefined generator functions can be easily expanded with custom functions.
 
-![The grapherator workflow](grapherator_workflow.png)
+![The grapherator workflow](grapherator_workflow.pdf)
 
-![Example graphs with two weights per edge. Each the graph topology and a scatterplot of the edge weights is shown.](examples.png)
+![Example graphs with two weights per edge. Each the graph topology and a scatterplot of the edge weights is shown.](grapherator_examples.pdf)
 
 ## Support
 

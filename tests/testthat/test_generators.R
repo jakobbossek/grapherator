@@ -68,6 +68,7 @@ test_that("weight generators work:", {
     expect_true(length(g1$weights) > 0L)
     expect_true(all(sapply(g1$weights, function(w) all(dim(w) == n))))
     expect_true(all(sapply(g1$weights, isSymmetricMatrix)))
+    expect_true(all(sapply(g1$weights, function(w) all(diag(w) == 0))))
   }
 })
 

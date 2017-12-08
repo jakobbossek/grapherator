@@ -4,6 +4,18 @@
 #' The method can be applied multiple times with different parameterizations. E.g.,
 #' add edges in clusters first and add edges between clusters in a second step.
 #'
+#' @references
+#' Erdos, P., and A. Renyi. 1959. "On random graphs, I." Publicationes Mathematicae
+#' (Debrecen) 6: 290-97.
+#'
+#' Waxman, B. M. 1988. "Routing of Multipoint Connections."" IEEE Journal on Selected
+#' Areas in Communications 6 (9): 1617-22. doi:10.1109/49.12889.
+#'
+#' Knowles, J. D., and D. W. Corne. 2001. "Benchmark Problem Generators and Results
+#' for the Multiobjective Degree-Constrained Minimum Spanning Tree Problem."
+#' In Proceedings of the 3rd Annual Conference on Genetic and Evolutionary
+#' Computation, 424-31. GECCO'01. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc.
+#'
 #' @template arg_grapherator
 #' @param generator [\code{function(graph, ...)}]\cr
 #'   Method applied to \code{graph} in order to determine which edges to add.
