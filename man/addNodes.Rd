@@ -5,7 +5,7 @@
 \title{Add nodes to graph.}
 \usage{
 addNodes(graph, n, generator, coordinates = NULL, by.centers = FALSE,
-  par.fun = NULL, ...)
+  skip.centers = integer(0L), par.fun = NULL, ...)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -34,6 +34,11 @@ Default is \code{NULL}.}
 Should coordinates be placed for each cluster center seperately? This enables
 generation of clustered graphs.
 Default is \code{FALSE}.}
+
+\item{skip.centers}{[\code{integer}]\cr
+Optional IDs of cluster centers not to consider in clustered node generation, i.e.,
+if \code{by.centers = TRUE}.
+Default is not to skip any cluster.}
 
 \item{par.fun}{[\code{function(cc) | NULL}]\cr
 Optional function which is applied to each cluster center before the generation

@@ -23,6 +23,10 @@
 #'   Should coordinates be placed for each cluster center seperately? This enables
 #'   generation of clustered graphs.
 #'   Default is \code{FALSE}.
+#' @param skip.centers [\code{integer}]\cr
+#'   Optional IDs of cluster centers not to consider in clustered node generation, i.e.,
+#'   if \code{by.centers = TRUE}.
+#'   Default is not to skip any cluster.
 #' @param par.fun [\code{function(cc) | NULL}]\cr
 #'   Optional function which is applied to each cluster center before the generation
 #'   of coordinates in case \code{by.centers} is \code{TRUE}. This enables to specifically
@@ -32,7 +36,7 @@
 #' @template ret_grapherator
 #' @family graph generators
 #' @export
-addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, par.fun = NULL, ...) {
+addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE, skip.centers = integer(0L), par.fun = NULL, ...) {
   assertClass(graph, "grapherator")
 
   if (graph$n.edges > 0L)
@@ -88,10 +92,21 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
     # currently we allow only one "level" of clustering
     # thus we can set the membership here already
     graph$membership = 1:nc
+
+    # sanity check skip.centers
+    if (length(skip.centers) > 0L) {
+      infeasible.centers = setdiff(skip.centers, 1:graph$n.clusters)
+      if (length(infeasible.centers) > 0L)
+        stopf("addNodes: cluster centers %s shall be skipped, but there are only %i clusters.", collapse(infeasible.centers), graph$n.clusters)
+    }
+
     n = if (length(n) == 1L) rep(n, nc) else n
     node.type = NULL
     coords = vector(mode = "list", length = nc)
+    membership = integer()
     for (i in seq_len(nc)) {
+      if (i %in% skip.centers)
+        next
       gen.args = list(n = n[i])
       # generate coordinates in origin
       if (!is.null(par.fun))
@@ -108,12 +123,13 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
       #FIXME: ugly as hell
       coords.cluster = t(t(coords.cluster) + cl.center - rects / 2)
       coords[[i]] = coords.cluster
+      membership = c(membership, rep(i, nrow(coords.cluster)))
     }
     # concatenate coordinates
     coords = do.call(rbind, coords)
     # assign membership (we know which cluster belongs to which center)
 
-    membership = rep(1:nc, n)
+    #membership = rep(1:nc, n)
   }
   # update meta data of graph
   graph$n.nodes = if (!is.null(graph$n.nodes)) graph$n.nodes + sum(n) else sum(n)

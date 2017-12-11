@@ -69,6 +69,8 @@ addEdges = function(graph, generator, type = "all", k = NULL, ...) {
     for (cluster in clusters) {
       # get all points in that cluster
       idx.cluster = which(graph$membership == cluster)
+      if (length(idx.cluster) == 1L)
+        next
       # NAs indicate cluster skipping
       if (is.na(k[cluster]))
         next
@@ -103,6 +105,9 @@ addEdges = function(graph, generator, type = "all", k = NULL, ...) {
           next
         idx.cluster = sample(idx.cluster, size = k, replace = FALSE)
       }
+
+      if (length(idx.cluster) == 1L)
+        next
 
       # generate temporary graph
       graph2 = graph
