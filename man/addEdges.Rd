@@ -4,7 +4,7 @@
 \alias{addEdges}
 \title{Add edges to graph.}
 \usage{
-addEdges(graph, generator, type = "all", ...)
+addEdges(graph, generator, type = "all", k = NULL, ...)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -15,9 +15,15 @@ Method applied to \code{graph} in order to determine which edges to add.}
 
 \item{type}{[\code{character(1)}]\cr
 Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
-instead applies the method for each cluster separately. Lastly, value \dQuote{intercluster}
-applies \code{generator} to the cluster centers exclusively.
+instead applies the method for each cluster separately. Value \dQuote{intercluster}
+selects each \code{k} nodes from each cluster and applies \code{generator} to the union.
+Lastly, value \dQuote{intercenter} selects the cluster centers exclusively.
 Default is \dQuote{all}.}
+
+\item{k}{[\code{integer} | \code{NULL}]\cr
+Integer vector specifying the number of nodes selected randomly from each cluster
+to be selected for edge construction. May be a scalar value or a vector of length
+\code{graph$n.clusters}. NAs are allowed and indicate clusters to be ignored.}
 
 \item{...}{[any]\cr
 Further arguments passed down to edge generator \code{generator}.}

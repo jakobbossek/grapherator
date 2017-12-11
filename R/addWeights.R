@@ -66,7 +66,7 @@ addWeights = function(graph, generator = NULL, weights = NULL, symmetric = TRUE,
       weights = makeIntegerWeights(weights, graph$adj.mat)
     graph$weights = c(graph$weights, list(weights))
     graph$n.weights = graph$n.weights + 1L
-    graph$weight.types = c(graph$weight.types, "manual")
+    graph$weight.types = c(graph$weight.types, "MAN")
   # generate weights
   } else {
     generator.res = do.call(generator, c(list(graph = graph), list(...)))

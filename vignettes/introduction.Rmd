@@ -121,7 +121,7 @@ g = addNodes(g, n = 5, coordinates = matrix(c(10, 10, 20, 20, 30, 30, 10, 20, 40
 g = addNodes(g, n = 10, by.centers = TRUE, generator = addNodesNormal, x.mean = 5, y.mean = 5, x.sd = 2, y.sd = 2, lower = c(0, 0), upper = c(10, 10))
 g = addEdges(g, generator = addEdgesGilbert, p = 0.2, type = "intracluster")
 g = addEdges(g, generator = addEdgesSpanningTree, type = "intracluster")
-g = addEdges(g, generator = addEdgesDelauney, type = "intercluster")
+g = addEdges(g, generator = addEdgesDelauney, type = "intercenter")
 g = addWeights(g, generator = addWeightsDistance, method = "manhattan")
 g = addWeights(g, generator = addWeightsRandom, method = rexp, rate = 0.1)
 print(g)

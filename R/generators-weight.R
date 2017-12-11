@@ -120,7 +120,7 @@ addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
 
   diag(ww1) = diag(ww2) = 0
 
-  return(list(weights = list(ww1, ww2), generator = "CONC"))
+  return(list(weights = list(ww1, ww2), generator = "CONCWG"))
 }
 
 #' @export
@@ -161,7 +161,7 @@ addWeightsCorrelated = function(graph, rho, ...) {
   diag(Y) = 0
   diag(ww.euc) = 0
 
-  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-COR", rho)))
+  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-CORWG", rho)))
 }
 
 #' @export
@@ -180,7 +180,7 @@ addWeightsDistance = function(graph, method, ...) {
 
   diag(ww) = 0
 
-  return(list(weights = list(ww), generator = "DIST"))
+  return(list(weights = list(ww), generator = "DWG"))
 }
 
 #' @export
@@ -202,5 +202,5 @@ addWeightsRandom = function(graph, method, ...) {
 
   diag(ww) = 0
 
-  return(list(weights = list(ww), generator = "RND"))
+  return(list(weights = list(ww), generator = "RWG"))
 }

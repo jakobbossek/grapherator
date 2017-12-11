@@ -92,7 +92,7 @@ test_that("graph generation: simple graph", {
   expect_true(g$n.nodes == 50L)
   expect_true(g$n.clusters == 0L)
   expect_true(g$n.weights == 2L)
-  expect_set_equal(g$weight.types, c("DIST", "RND"))
+  expect_set_equal(g$weight.types, c("DWG", "RWG"))
   expect_true(isSymmetricMatrix(g$weights[[1L]]))
   expect_true(isSymmetricMatrix(g$weights[[2L]]))
   expect_output(print(g), regexp = "GRAPH")
@@ -127,6 +127,29 @@ test_that("graph generation: complex clustered graph", {
   expect_true(isSymmetricMatrix(g$weights[[3L]])) # distance based are always symmetric
 
   expect_error(plot(g), regexpr = "not supported")
+})
+
+test_that("graph generation: complex clustered graph with complex edge structure", {
+  g = graph(lower = 0, upper = 100)
+  g = addNodes(g, n = 5L, generator = addNodesLHS)
+  g = addNodes(g, n = 7L, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(5, 5))
+  g = addEdges(g, type = "intercenter", generator = addEdgesSpanningTree)
+  g = addEdges(g, type = "intercluster", k = c(2L, 3L, 2L, NA, NA, NA, 4L), generator = addEdgesDelauney)
+  g = addEdges(g, type = "intracluster", generator = addEdgesSpanningTree)
+  g = addWeights(g, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.3)
+  g = addWeights(g, generator = addWeightsDistance, method = "minkowski", p = 2.5, symmetric = FALSE)
+
+  # check plotting of cluster centers
+  pls = plot(g, show.cluster.centers = TRUE)
+  expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
+
+  expect_class(g, "grapherator")
+  expect_true(g$n.nodes == 5 * (7 + 1L))
+  expect_true(g$n.clusters == 5L)
+  expect_true(g$n.weights == 2L)
+  expect_list(g$weights, types = "matrix", any.missing = FALSE, all.missing = FALSE, len = g$n.weights)
+  expect_true(isSymmetricMatrix(g$weights[[1L]]))
+  expect_true(isSymmetricMatrix(g$weights[[2L]]))
 })
 
 test_that("graph generation: manual passing of coordinates weights works", {

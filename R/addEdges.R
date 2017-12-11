@@ -21,18 +21,23 @@
 #'   Method applied to \code{graph} in order to determine which edges to add.
 #' @param type [\code{character(1)}]\cr
 #'   Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
-#'   instead applies the method for each cluster separately. Lastly, value \dQuote{intercluster}
-#'   applies \code{generator} to the cluster centers exclusively.
+#'   instead applies the method for each cluster separately. Value \dQuote{intercluster}
+#'   selects each \code{k} nodes from each cluster and applies \code{generator} to the union.
+#'   Lastly, value \dQuote{intercenter} selects the cluster centers exclusively.
 #'   Default is \dQuote{all}.
+#' @param k [\code{integer} | \code{NULL}]\cr
+#'   Integer vector specifying the number of nodes selected randomly from each cluster
+#'   to be selected for edge construction. May be a scalar value or a vector of length
+#'   \code{graph$n.clusters}. NAs are allowed and indicate clusters to be ignored.
 #' @param ... [any]\cr
 #'   Further arguments passed down to edge generator \code{generator}.
 #' @family graph generators
 #' @template ret_grapherator
 #' @export
-addEdges = function(graph, generator, type = "all", ...) {
+addEdges = function(graph, generator, type = "all", k = NULL, ...) {
   assertClass(graph, "grapherator")
   assertFunction(generator)
-  assertChoice(type, choices = c("all", "intercluster", "intracluster"))
+  assertChoice(type, choices = c("all", "intercluster", "intracluster", "intercenter"))
 
   if (graph$n.weights > 0L)
     stopf("addEdges: add edges before adding weights.")
@@ -50,13 +55,54 @@ addEdges = function(graph, generator, type = "all", ...) {
   if (graph$n.clusters == 0L & type %in% c("intracluster", "intercluster"))
     stopf("addEdges: type {intra,inter}cluster only possible if nodes are clustered.")
 
-  if (type == "intracluster") {
+  if (type == "intercluster") {
+    if (is.null(k))
+      stopf("addEdges: for type 'intercluster' parameter k must be set.")
+    if (length(k) == 1L)
+      k = rep(k, graph$n.clusters)
+    assertInteger(k, lower = 1L, any.missing = TRUE, all.missing = FALSE)
+
+    # apply stuff clusterwise
+    clusters = seq_len(graph$n.clusters)
+    # gather ids of nodes to consider
+    used.nodes = integer(0L)
+    for (cluster in clusters) {
+      # get all points in that cluster
+      idx.cluster = which(graph$membership == cluster)
+      # NAs indicate cluster skipping
+      if (is.na(k[cluster]))
+        next
+      if (k[cluster] > length(idx.cluster))
+        stopf("addEdges: k[%i] is larger than the %i-th cluster.", cluster, cluster)
+      idx.cluster = sample(idx.cluster, size = k[cluster], replace = FALSE)
+      used.nodes = c(used.nodes, idx.cluster)
+    }
+    # generate temporary graph
+    graph2 = graph
+    graph2$coordinates = graph$coordinates[used.nodes, , drop = FALSE]
+    graph2$n.nodes = length(used.nodes)
+    # apply addEdge method to subset of cluster points
+    res.adj.mat = do.call(generator, c(list(graph = graph2), list(...)))
+    cl.adj.mat = res.adj.mat$adj.mat
+    edge.type = res.adj.mat$generator
+    # update adjacency matrix
+    adj.mat[used.nodes, used.nodes] = adj.mat[used.nodes, used.nodes] | cl.adj.mat
+    graph$adj.mat = adj.mat
+    edge.type = sprintf("CL%s", edge.type)
+  } else if (type == "intracluster") {
+
     # apply stuff clusterwise
     clusters = seq_len(graph$n.clusters)
     # for each cluster ...
     for (cluster in clusters) {
       # get all points in that cluster
       idx.cluster = which(graph$membership == cluster)
+      if (!is.null(k) & type == "intercluster") {
+        # NAs indicate cluster skipping
+        if (is.na(k[cluster]))
+          next
+        idx.cluster = sample(idx.cluster, size = k, replace = FALSE)
+      }
 
       # generate temporary graph
       graph2 = graph
@@ -71,7 +117,7 @@ addEdges = function(graph, generator, type = "all", ...) {
     }
     graph$adj.mat = adj.mat
     edge.type = sprintf("CL%s", edge.type)
-  } else if (type == "intercluster") {
+  } else if (type == "intercenter") {
     idx.centers = graph$center.ids
 
     # generate temporary graph
