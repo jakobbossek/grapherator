@@ -78,7 +78,7 @@ print.grapherator = function(x, ...) {
   catf("#edges           : %i (%s)", getNumberOfEdges(x), BBmisc::collapse(x$edge.types))
   n.clusters = getNumberOfClusters(x)
   if (n.clusters > 0L)
-    catf("#clusters:         %i", n.clusters)
+    catf("#clusters        : %i", n.clusters)
   n.weights = length(x$weights)
   catf("#weights per edge: %i (%s)", getNumberOfWeights(x), BBmisc::collapse(x$weight.types))
 }

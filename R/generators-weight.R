@@ -161,7 +161,7 @@ addWeightsCorrelated = function(graph, rho, ...) {
   diag(Y) = 0
   diag(ww.euc) = 0
 
-  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f-CORWG", rho)))
+  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f_CORWG", rho)))
 }
 
 #' @export

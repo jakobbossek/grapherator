@@ -114,7 +114,7 @@ addNodes = function(graph, n, generator, coordinates = NULL, by.centers = FALSE,
       gen.args = c(gen.args, list(...))
       res.cluster = do.call(generator, gen.args)
       coords.cluster = res.cluster$coords
-      node.type = res.cluster$generator
+      node.type = paste0("CL", res.cluster$generator)
 
       #coords.cluster = moveToOrigin(coords.cluster)
       rects = apply(apply(coords.cluster, 2L, range), 2L, diff)

@@ -96,6 +96,7 @@ test_that("graph generation: simple graph", {
   expect_true(isSymmetricMatrix(g$weights[[1L]]))
   expect_true(isSymmetricMatrix(g$weights[[2L]]))
   expect_output(print(g), regexp = "GRAPH")
+  expect_character(as.character(g))
 
   pls = plot(g)
   expect_list(pls, types = "ggplot", len = 2L, any.missing = FALSE, all.missing = FALSE)
