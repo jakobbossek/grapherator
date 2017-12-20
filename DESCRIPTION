@@ -1,6 +1,6 @@
 Package: grapherator
 Title: A Modular Multi-Step Graph Generator
-Description: Modular set of functions for graph generation. Aimed for research in single- and multi-objective combinatorial optimization.
+Description: Modular set of functions for graph generation. Aimed for research in the field of single- and multi-objective combinatorial optimization.
 Version: 1.0.0
 Encoding: UTF-8
 Date: 2017-12-20
