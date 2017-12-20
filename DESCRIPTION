@@ -1,9 +1,9 @@
 Package: grapherator
-Title: A modular multi-step graph generator
+Title: A Modular Multi-Step Graph Generator
 Description: Functions to construct graphs for benchmarking single- and multi-objective graph algorithms.
 Version: 1.0.0
 Encoding: UTF-8
-Date: 2017-12-04
+Date: 2017-12-20
 Authors@R: c(person("Jakob", "Bossek", email = "j.bossek@gmail.com", role =
     c("aut", "cre")))
 Maintainer: Jakob Bossek <j.bossek@gmail.com>
