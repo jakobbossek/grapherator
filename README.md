@@ -4,7 +4,7 @@
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grapherator)](http://cran.rstudio.com/web/packages/grapherator/index.html)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/grapherator?color=orange)](http://cran.rstudio.com/web/packages/grapherator/index.html)
 [![Build Status](https://travis-ci.org/jakobbossek/grapherator.svg?branch=master)](https://travis-ci.org/jakobbossek/grapherator)
-[![Build status](https://ci.appveyor.com/api/projects/status/f83u7suaxqxmtc80/branch/master?svg=true)](https://ci.appveyor.com/project/jakobbossek/mcmst/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/f83u7suaxqxmtc80/branch/master?svg=true)](https://ci.appveyor.com/project/jakobbossek/grapherator/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/jakobbossek/grapherator/badge.svg?branch=master)](https://coveralls.io/github/jakobbossek/grapherator?branch=master)
 
 ## Introduction
