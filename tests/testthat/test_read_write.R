@@ -9,9 +9,11 @@ test_that("writeGP and readGP work well", {
   g = addEdges(g, generator = addEdgesWaxman, type = "intercenter", alpha = 0.8, beta = 0.6)
   g = addWeights(g, generator = addWeightsCorrelated, rho = -0.9)
 
-  filename = "test.graph"
+
+  filename = tempfile(fileext = ".graph")
   writeGP(g, filename)
   g2 = readGP(filename)
+  unlink(filename)
 
   expect_equal(g$n.nodes, g2$n.nodes)
   expect_equal(g$n.clusters, g2$n.clusters)
@@ -23,5 +25,4 @@ test_that("writeGP and readGP work well", {
   expect_equal(length(g$weights), length(g2$weights))
   expect_true(all(dim(g$coordinates) == dim(g2$coordinates)))
   expect_true(all(g$adj.mat == g2$adj.mat))
-  unlink(filename)
 })
