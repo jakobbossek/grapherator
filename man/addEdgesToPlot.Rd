@@ -15,6 +15,9 @@ Graph.}
 
 \item{edge.list}{[\code{matrix}]\cr
 Matrix of edges (each column is one edge).}
+
+\item{...}{[any]\cr
+Arguments passed down to \code{\link[ggplot2]{geom_segment}}.}
 }
 \value{
 [\code{\link[ggplot2]{ggplot}}] Modified \code{x}.

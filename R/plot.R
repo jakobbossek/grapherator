@@ -168,8 +168,31 @@ plot.grapherator = function(x, y = NULL,
   return(list(pl.coords = pl.coords, pl.weights = pl.weights))
 }
 
-# experimental
-addEdgesToPlot = function(x, g, edge.list) {  # nocov start
+#' @title Highlight edges in graph.
+#'
+#' @description Highlights edges in coordinate plot.
+#'
+#' @param x [\code{\link[ggplot2]{ggplot}}]\cr
+#'   Coordinate plot generated via \code{\link{plot.grapherator}}.
+#' @param g [\code{\link[grapherator]{grapherator}}]\cr
+#'   Graph.
+#' @param edge.list [\code{matrix}]\cr
+#'   Matrix of edges (each column is one edge).
+#' @param ... [any]\cr
+#'   Arguments passed down to \code{\link[ggplot2]{geom_segment}}.
+#' @return [\code{\link[ggplot2]{ggplot}}] Modified \code{x}.
+#' @examples
+#' \dontrun{
+#' g = graph(0, 100)
+#' g = addNodes(g, n = 10, generator = addNodesUniform)
+#' g = addEdges(g, generator = addEdgesComplete)
+#' pl = plot(g)$pl.coords
+#' el = matrix(c(1, 2, 1, 3, 4, 5, 3, 4), nrow = 2L)
+#' pl = addEdgesToPlot(pl, g, el)
+#' print(pl)
+#' }
+#' @export
+addEdgesToPlot = function(x, g, edge.list, ...) {  # nocov start
   assertClass(x, "ggplot")
   assertMatrix(edge.list, nrows = 2L, min.cols = 1L, any.missing = FALSE, all.missing = FALSE)
 
@@ -189,5 +212,8 @@ addEdgesToPlot = function(x, g, edge.list) {  # nocov start
       x2 = coords[2L, 1L], y2 = coords[2L, 2L]))
   }
 
-  x + geom_segment(data = edges, aes_string(x = "x1", y = "y1", xend = "x2", yend = "y2"), colour = "tomato")
+  geom.pars = list(data = edges, mapping = ggplot2::aes_string(x = "x1", y = "y1", xend = "x2", yend = "y2"))
+  geom.pars = c(geom.pars, BBmisc::insert(list(colour = "tomato"), list(...)))
+
+  x + do.call(ggplot2::geom_segment, geom.pars)
 }  # nocov end

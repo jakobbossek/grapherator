@@ -4,7 +4,8 @@
 \alias{addEdges}
 \title{Add edges to graph.}
 \usage{
-addEdges(graph, generator, type = "all", k = NULL, ...)
+addEdges(graph, generator, type = "all", k = NULL, cluster.ids = NULL,
+  ...)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -15,7 +16,7 @@ Method applied to \code{graph} in order to determine which edges to add.}
 
 \item{type}{[\code{character(1)}]\cr
 Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
-instead applies the method for each cluster separately. Value \dQuote{intercluster}
+instead applies the method for each cluster seperately. Value \dQuote{intercluster}
 selects each \code{k} nodes from each cluster and applies \code{generator} to the union.
 Lastly, value \dQuote{intercenter} selects the cluster centers exclusively.
 Default is \dQuote{all}.}
@@ -24,6 +25,11 @@ Default is \dQuote{all}.}
 Integer vector specifying the number of nodes selected randomly from each cluster
 to be selected for edge construction. May be a scalar value or a vector of length
 \code{graph$n.clusters}. NAs are allowed and indicate clusters to be ignored.}
+
+\item{cluster.ids}{[\code{integer} | \code{NULL}]\cr
+Ignored unless \code{type} is not set to \dQuote{intracluster}.
+Integer vector of cluster IDs. If \code{NULL} the \code{generator} is applied
+within each cluster.}
 
 \item{...}{[any]\cr
 Further arguments passed down to edge generator \code{generator}.}
@@ -35,6 +41,19 @@ Further arguments passed down to edge generator \code{generator}.}
 This method allows to add edges to a \code{grapherator} graph.
 The method can be applied multiple times with different parameterizations. E.g.,
 add edges in clusters first and add edges between clusters in a second step.
+}
+\examples{
+g = graph(0, 1000)
+g = addNodes(g, n = 5, generator = addNodesLHS)
+g = addNodes(g, n = c(3, 10, 20, 10, 40), by.centers = TRUE, generator = addNodesUniform,
+  lower = c(0, 0), upper = c(30, 30))
+# user different edge generators for clusters
+g = addEdges(g, generator = addEdgesDelauney, type = "intracluster", cluster.ids = 1:3)
+g = addEdges(g, generator = addEdgesSpanningTree, type = "intracluster", cluster.ids = 4:5)
+# link cluster centers
+g = addEdges(g, generator = addEdgesSpanningTree, runs = 2, type = "intercenter")
+# additional random links between each 2 nodes from each cluster
+g = addEdges(g, generator = addEdgesGilbert, p = 0.4, type = "intercluster", k = 2)
 }
 \references{
 Erdos, P., and A. Renyi. 1959. "On random graphs, I." Publicationes Mathematicae
