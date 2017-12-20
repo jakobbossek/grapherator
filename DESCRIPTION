@@ -1,6 +1,6 @@
 Package: grapherator
 Title: A Modular Multi-Step Graph Generator
-Description: Modular set of functions for graph generation. Aimed for research in the field of single- and multi-objective combinatorial optimization.
+Description: Set of functions for step-wise generation of (weighted) graphs. Aimed for research in the field of single- and multi-objective combinatorial optimization. Graphs are generated adding nodes, edges and weights. Each step may be repeated multiple times with different predefined and custom generators resulting in high flexibility regarding the graph topology and structure of edge weights.
 Version: 1.0.0
 Encoding: UTF-8
 Date: 2017-12-20
