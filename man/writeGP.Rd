@@ -48,8 +48,10 @@ g = addEdges(g, generator = addEdgesGrid)
 g = addWeights(g, generator = addWeightsRandom, method = runif, min = 5, max = 100, to.int = TRUE)
 g = addWeights(g, generator = addWeightsRandom, method = runif, min = 10, max = 100, to.int = TRUE)
 \dontrun{
-writeGP(g, file = "myGraph.graph")
-g2 = readGP(file = "myGraph.graph")
+filename = tempfile()
+writeGP(g, file = filename)
+g2 = readGP(file = filename)
+unlink(filename)
 do.call(gridExtra::grid.arrange, c(plot(g), plot(g2), list(nrow = 2)))
 }
 }
