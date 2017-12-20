@@ -77,7 +77,7 @@ test_that("graph generation: simple graph", {
   # with both euclidean and random weights
 
   g = graph(lower = 0, upper = 100)
-  g = addNodes(g, n = 50L, generator = addNodesUniform)
+  g = addNodes(g, n = 25L, generator = addNodesUniform)
   g = addWeights(g, generator = addWeightsDistance, method = "euclidean", symmetric = TRUE)
   # check if plotting works
   pls = plot(g)
@@ -89,7 +89,7 @@ test_that("graph generation: simple graph", {
   g = addWeights(g, generator = addWeightsRandom, method = runif, symmetric = TRUE)
 
   expect_class(g, "grapherator")
-  expect_true(g$n.nodes == 50L)
+  expect_true(g$n.nodes == 25L)
   expect_true(g$n.clusters == 0L)
   expect_true(g$n.weights == 2L)
   expect_set_equal(g$weight.types, c("DWG", "RWG"))
@@ -106,7 +106,8 @@ test_that("graph generation: complex clustered graph", {
   g = graph(lower = 0, upper = 100)
   g = addNodes(g, n = 3L, generator = addNodesLHS)
   g = addNodes(g, n = 9L, by.centers = TRUE, generator = addNodesUniform, lower = c(0, 0), upper = c(1, 1))
-  g = addNodes(g, n = 100L, generator = addNodesGrid)
+  g = addNodes(g, n = 25L, generator = addNodesGrid)
+  g = addEdges(g, generator = addEdgesGilbert, p = 0.3)
   g = addWeights(g, generator = addWeightsRandom, method = rnorm, mean = 5, sd = 1.3)
   g = addWeights(g, generator = addWeightsDistance, method = "minkowski", p = 2.5, symmetric = FALSE)
 
@@ -119,7 +120,7 @@ test_that("graph generation: complex clustered graph", {
   })
 
   expect_class(g, "grapherator")
-  expect_true(g$n.nodes == 130L)
+  expect_true(g$n.nodes == 55L)
   expect_true(g$n.clusters == 3L)
   expect_true(g$n.weights == 3L)
   expect_list(g$weights, types = "matrix", any.missing = FALSE, all.missing = FALSE, len = g$n.weights)
