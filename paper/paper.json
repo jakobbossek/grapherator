@@ -12,12 +12,12 @@
   ],
   "identifier": "",
   "codeRepository": "https://github.com/jakobbossek/grapherator",
-  "datePublished": "2017-12-06",
-  "dateModified": "2017-12-06",
-  "dateCreated": "2017-12-06",
-  "description": "Functions to construct graphs for benchmarking single- and multi-objective graph algorithms",
-  "keywords": "software, r, combinatorial optimization, graph problems",
+  "datePublished": "2017-12-21",
+  "dateModified": "2017-12-21",
+  "dateCreated": "2017-12-21",
+  "description": "Set of functions for step-wise generation of (weighted) graphs. Aimed for research in the field of single- and multi-objective combinatorial optimization. Graphs are generated adding nodes, edges and weights. Each step may be repeated multiple times with different predefined and custom generators resulting in high flexibility regarding the graph topology and structure of edge weights.",
+  "keywords": "software, r, combinatorial optimization, graph problems, random graphs",
   "license": "BSD2",
-  "title": "A modular multi-step graph generator",
+  "title": "A Modular Multi-Step Graph Generator",
   "version": "v1.0.0"
 }

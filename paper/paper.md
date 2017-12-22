@@ -1,5 +1,5 @@
 ---
-title: 'grapherator: A modular multi-step graph generator'
+title: 'grapherator: A Modular Multi-Step Graph Generator'
 authors:
 - affiliation: 1
   name: Jakob Bossek
@@ -12,6 +12,7 @@ tags:
 - combinatorial optimization
 - graph problems
 - random graphs
+- graph generation
 - multi-objective optimization
 affiliations:
 - index: 1
