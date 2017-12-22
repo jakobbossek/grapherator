@@ -106,9 +106,13 @@ readGP = function(file) {
   g$n.weights  = p  = meta[4L]
 
   # import weight and node types
-  g$weight.types = strsplit(scan(con, what = character(), n = 1L, sep = ",", quiet = TRUE), ",")[[1L]]
+  g$weight.types = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
   g$node.types   = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
   g$edge.types   = strsplit(scan(con, what = character(), n = 1L, quiet = TRUE), ",")[[1L]]
+
+  print(g$weight.types)
+  print(g$node.types)
+  print(g$edge.types)
 
   # import coordinates
   g$coordinates = as.matrix(read.table(con, sep = ",", nrows = n, header = FALSE, stringsAsFactors = FALSE))
