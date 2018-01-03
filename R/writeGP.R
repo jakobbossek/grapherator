@@ -144,5 +144,6 @@ readGP = function(file) {
   }
   g$adj.mat = adj.mat
   g$weights = weights
+  g$adj.list = lapply(1:nrow(g$adj.mat), function(i) which(g$adj.mat[i, ]))
   return(g)
 }
