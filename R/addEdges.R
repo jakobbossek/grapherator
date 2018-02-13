@@ -19,6 +19,7 @@
 #' @template arg_grapherator
 #' @param generator [\code{function(graph, ...)}]\cr
 #'   Method applied to \code{graph} in order to determine which edges to add.
+#'   See \link{edgeGenerators} for predefined edge generators.
 #' @param type [\code{character(1)}]\cr
 #'   Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}
 #'   instead applies the method for each cluster seperately. Value \dQuote{intercluster}

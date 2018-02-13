@@ -9,6 +9,7 @@
 #'   Function used to generate weights. The functions needs to expect the graph
 #'   as the first argument \code{graph}. Additional control argument are
 #'   possible.
+#'   See \link{weightGenerators} for predefined weight generators.
 #' @param weights [\code{matrix}]\cr
 #'   Square matrix of weights.
 #'   If some weights are already assigned, pay attention to the correct dimensions.

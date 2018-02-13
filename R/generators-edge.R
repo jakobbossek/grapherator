@@ -1,4 +1,4 @@
-#' @title Edge generators.
+#' Edge generators.
 #'
 #' @description Function to add edges into a graph. The following methods
 #' are implemented so far:

@@ -14,7 +14,8 @@ Graph.}
 \item{generator}{[\code{function(graph, ...)}]\cr
 Function used to generate weights. The functions needs to expect the graph
 as the first argument \code{graph}. Additional control argument are
-possible.}
+possible.
+See \link{weightGenerators} for predefined weight generators.}
 
 \item{weights}{[\code{matrix}]\cr
 Square matrix of weights.

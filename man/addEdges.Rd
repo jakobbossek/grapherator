@@ -12,7 +12,8 @@ addEdges(graph, generator, type = "all", k = NULL, cluster.ids = NULL,
 Graph.}
 
 \item{generator}{[\code{function(graph, ...)}]\cr
-Method applied to \code{graph} in order to determine which edges to add.}
+Method applied to \code{graph} in order to determine which edges to add.
+See \link{edgeGenerators} for predefined edge generators.}
 
 \item{type}{[\code{character(1)}]\cr
 Value \dQuote{all} applies \code{generator} to all nodes. Value \dQuote{intracluster}

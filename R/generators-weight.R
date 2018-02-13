@@ -1,4 +1,4 @@
-#' @title Weight generators.
+#' Weight generators.
 #'
 #' @description Function for adding weight(s) to edges. The following functions
 #' are implemented and may be passed as argument \code{generator} to \code{\link{addWeights}}:
@@ -47,6 +47,7 @@
 #' }
 #' @export
 #' @rdname weightGenerators
+#' @name weightGenerators
 addWeightsConcave = function(graph, xhi = 10, nu = 20, M = 100, ...) {
   assertClass(graph, "grapherator")
   xhi = asInt(xhi, lower = 1)

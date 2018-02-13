@@ -19,6 +19,7 @@
 #'   Function used to generate nodes. The functions needs to expect the number
 #'   of points to generate as the first argument \code{n}. Additional control argument are
 #'   possible.
+#'   See \link{nodeGenerators} for predefined node generators.
 #' @param by.centers [\code{logical(1)}]\cr
 #'   Should coordinates be placed for each cluster center seperately? This enables
 #'   generation of clustered graphs.

@@ -24,7 +24,7 @@ Benchmarking algorithms for (combinatorial) optimization problems is usually car
 
 # Grapherator workflow
 
-The **grapherator** package implements a modular graph generation approach inspired by the [MOST project](http://www.optimization-online.org/DB_FILE/2008/01/1888.pdf). An (extensible) set of node, edge and weight generators allows for fast and convenient graph generation following a three step approach.
+The **grapherator** package implements a modular graph generation approach inspired by the [MOST project](http://www.optimization-online.org/DB_FILE/2008/01/1888.pdf) [@CJM08, @CJM05]. An (extensible) set of node, edge and weight generators allows for fast and convenient graph generation following a three step approach.
 
 1) **Node generation**: here the network topology is definined by placing points in the Euclidean plane.
 2) **Edge generation**: Links between nodes are established.
@@ -63,8 +63,8 @@ For each step there exist several preimplemented generator functions which are p
 
 ## Edge generators
 
-1. **Gilbert edge generator** [ER59]: Each edge is added independently with some probability p. This way one can generate Gilbert-graphs G(n, p).
-2. **Erdos-Renyi edge generator** [ER59]: m random edges are added.
+1. **Gilbert edge generator** [@ER59]: Each edge is added independently with some probability p. This way one can generate Gilbert-graphs G(n, p).
+2. **Erdos-Renyi edge generator** [@ER59]: m random edges are added.
 2. **Delauney edge generator**: The set of edges added to the graph is based on a Delauney triangulation of the node coordinates.
 3. **Complete edge generator**: All n(n-1)/2 edges are added.
 4. **Waxman edge generator** [@W88]: Edges are added according to Waxman's prbablistic model.

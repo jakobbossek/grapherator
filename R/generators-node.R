@@ -1,4 +1,4 @@
-#' @title Node generators.
+#' Node generators.
 #'
 #' @description Functions for the placement of nodes / node coordinates in the
 #' Euclidean plane. Function \code{addNodesLHS} generates a space-filling

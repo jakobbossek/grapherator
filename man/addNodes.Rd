@@ -21,7 +21,8 @@ nodes.}
 \item{generator}{[\code{function(graph, ...)}]\cr
 Function used to generate nodes. The functions needs to expect the number
 of points to generate as the first argument \code{n}. Additional control argument are
-possible.}
+possible.
+See \link{nodeGenerators} for predefined node generators.}
 
 \item{coordinates}{[\code{matrix(n, 2)}]\cr
 Matrix of coordinates (each row is one node/point).
