@@ -31,7 +31,7 @@ The technical pipeline (see Figure 1) follows a three-step approach: 1) node gen
 
 ![The grapherator workflow](grapherator_workflow.pdf)
 
-![Example graphs with two weights per edge. Each the graph topology and a scatterplot of the edge weights is shown.](grapherator_examples.pdf)
+![Example graphs with two weights per edge. Both graph topology and a scatterplot of the edge weights is shown.](grapherator_examples.pdf)
 
 ## Support
 
