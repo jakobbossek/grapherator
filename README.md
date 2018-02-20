@@ -1,5 +1,6 @@
 # grapherator: Modular graph generation
 
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00528/status.svg)](https://doi.org/10.21105/joss.00528)
 [![CRAN Status Badge](http://www.r-pkg.org/badges/version/grapherator)](http://cran.r-project.org/web/packages/grapherator)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grapherator)](http://cran.rstudio.com/web/packages/grapherator/index.html)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/grapherator?color=orange)](http://cran.rstudio.com/web/packages/grapherator/index.html)
