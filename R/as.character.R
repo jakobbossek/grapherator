@@ -24,7 +24,7 @@
 #' as.character(g)
 #' @export
 as.character.grapherator = function(x, ...) {
-  meta = sprintf("N%i-E%i-C%i-W%i", getNumberOfNodes(x), getNumberOfEdges(x),
+  meta = sprintf("%i-%i-%i-%i", getNumberOfNodes(x), getNumberOfEdges(x),
     getNumberOfClusters(x), getNumberOfWeights(x))
   types = list(x$node.types, x$edge.types, x$weight.types)
   types = sapply(types, collapse, "-")
