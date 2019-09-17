@@ -150,9 +150,19 @@ addWeightsCorrelated = function(graph, rho, ...) {
   Y = T %*% t(Q)
 
   # normalize Y
-  Y = (Y * graph$upper[1L])
+  Y = (Y * graph$upper[2L])
   Y = Y + abs(min(Y)) + 10
+
+  #print(Y)
+
+  cor.estimate = cor(ww.euc.num, as.numeric(Y))
+
   Y = matrix(Y, ncol = nrow(ww.euc))
+
+  # Sometimes we get an output as for -rho. Dirty hack to transform!
+  if ((rho > 0 & cor.estimate < 0) || (rho < 0 & cor.estimate > 0)) {
+    Y = (max(Y) - Y) + 10
+  }
 
   if (!is.null(graph$adj.mat)) {
     ww.euc[!graph$adj.mat] = Inf
@@ -162,7 +172,7 @@ addWeightsCorrelated = function(graph, rho, ...) {
   diag(Y) = 0
   diag(ww.euc) = 0
 
-  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f_CORWG", rho)))
+  return(list(weights = list(ww.euc, Y), generator = sprintf("%.2f--CORWG", rho)))
 }
 
 #' @export
