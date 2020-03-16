@@ -10,7 +10,7 @@
 
 ## Introduction
 
-Due to lack of real world data comparisson of algorithms for graph problems is most often carried out on artificially generated graphs. The R package **grapherator** implements a modular approach to benachmark graph generation focusing on undirected, weighted graphs. The graph generation process follows a three-step procedure: 
+Due to lack of real world data comparisson of algorithms for graph problems is most often carried out on artificially generated graphs. The R package **grapherator** implements a modular approach to benchmark graph generation focusing on undirected, weighted graphs. The graph generation process follows a three-step procedure: 
 
 1) Node generation,
 2) edge generation and finally 
