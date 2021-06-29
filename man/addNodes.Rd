@@ -78,3 +78,4 @@ plot(g, show.edges = FALSE)$pl.coords
 Other graph generators: \code{\link{addEdges}},
   \code{\link{addWeights}}, \code{\link{graph}}
 }
+\concept{graph generators}

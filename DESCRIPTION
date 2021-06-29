@@ -24,8 +24,9 @@ Suggests:
     knitr,
     rmarkdown,
     gridExtra,
-    magrittr
+    magrittr,
+    covr
 ByteCompile: yes
 LazyData: yes
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
