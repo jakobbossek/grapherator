@@ -59,3 +59,4 @@ do.call(gridExtra::grid.arrange, plot(g, show.edges = FALSE))
 Other graph generators: \code{\link{addEdges}},
   \code{\link{addNodes}}, \code{\link{addWeights}}
 }
+\concept{graph generators}

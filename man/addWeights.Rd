@@ -93,3 +93,4 @@ plot(g3)$pl.weights
 Other graph generators: \code{\link{addEdges}},
   \code{\link{addNodes}}, \code{\link{graph}}
 }
+\concept{graph generators}
