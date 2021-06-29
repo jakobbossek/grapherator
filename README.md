@@ -10,10 +10,7 @@ Badge](http://www.r-pkg.org/badges/version/grapherator)](http://cran.r-project.o
 Downloads](http://cranlogs.r-pkg.org/badges/grapherator)](http://cran.rstudio.com/web/packages/grapherator/index.html)
 [![CRAN
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/grapherator?color=orange)](http://cran.rstudio.com/web/packages/grapherator/index.html)
-[![Build
-Status](https://travis-ci.org/jakobbossek/grapherator.svg?branch=master)](https://travis-ci.org/jakobbossek/grapherator)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/n5iheb2q282lt9y3/branch/master?svg=true)](https://ci.appveyor.com/project/jakobbossek/grapherator/branch/master)
+[![R-CMD-check](https://github.com/jakobbossek/grapherator/workflows/R-CMD-check/badge.svg)](https://github.com/jakobbossek/grapherator/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/jakobbossek/grapherator/branch/master/graph/badge.svg)](https://codecov.io/gh/jakobbossek/grapherator?branch=master)
 <!-- badges: end -->
