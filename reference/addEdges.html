@@ -142,8 +142,7 @@ The method can be applied multiple times with different parameterizations. E.g.,
 add edges in clusters first and add edges between clusters in a second step.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addEdges</span><span class='op'>(</span><span class='va'>graph</span>, <span class='va'>generator</span>, type <span class='op'>=</span> <span class='st'>"all"</span>, k <span class='op'>=</span> <span class='cn'>NULL</span>,
-  cluster.ids <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>addEdges</span><span class='op'>(</span><span class='va'>graph</span>, <span class='va'>generator</span>, type <span class='op'>=</span> <span class='st'>"all"</span>, k <span class='op'>=</span> <span class='cn'>NULL</span>, cluster.ids <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,8 +203,10 @@ In Proceedings of the 3rd Annual Conference on Genetic and Evolutionary
 Computation, 424-31. GECCO'01. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other graph generators: <code><a href='addNodes.html'>addNodes</a></code>,
-  <code><a href='addWeights.html'>addWeights</a></code>, <code><a href='graph.html'>graph</a></code></p></div>
+    <div class='dont-index'><p>Other graph generators: 
+<code><a href='addNodes.html'>addNodes</a>()</code>,
+<code><a href='addWeights.html'>addWeights</a>()</code>,
+<code><a href='graph.html'>graph</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>g</span> <span class='op'>=</span> <span class='fu'><a href='graph.html'>graph</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1000</span><span class='op'>)</span>
