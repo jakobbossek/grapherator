@@ -4,9 +4,15 @@
 \alias{plot.grapherator}
 \title{Visualize graph.}
 \usage{
-\method{plot}{grapherator}(x, y = NULL, show.cluster.centers = TRUE,
-  highlight.clusters = FALSE, show.edges = TRUE,
-  weight.plot.type = "histogram", ...)
+\method{plot}{grapherator}(
+  x,
+  y = NULL,
+  show.cluster.centers = TRUE,
+  highlight.clusters = FALSE,
+  show.edges = TRUE,
+  weight.plot.type = "histogram",
+  ...
+)
 }
 \arguments{
 \item{x}{[\code{grapherator}]\cr

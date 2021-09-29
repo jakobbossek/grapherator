@@ -4,8 +4,16 @@
 \alias{addNodes}
 \title{Add nodes to graph.}
 \usage{
-addNodes(graph, n, generator, coordinates = NULL, by.centers = FALSE,
-  skip.centers = integer(0L), par.fun = NULL, ...)
+addNodes(
+  graph,
+  n,
+  generator,
+  coordinates = NULL,
+  by.centers = FALSE,
+  skip.centers = integer(0L),
+  par.fun = NULL,
+  ...
+)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -75,7 +83,9 @@ plot(g, show.edges = FALSE)$pl.coords
 }
 }
 \seealso{
-Other graph generators: \code{\link{addEdges}},
-  \code{\link{addWeights}}, \code{\link{graph}}
+Other graph generators: 
+\code{\link{addEdges}()},
+\code{\link{addWeights}()},
+\code{\link{graph}()}
 }
 \concept{graph generators}

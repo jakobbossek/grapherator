@@ -135,7 +135,9 @@ addEdgesDelauney = function(graph, ...) {
   adj.mat = matrix(FALSE, nrow = n, ncol = n)
   # compute triangulation
   # The 5, 6 colums contains the indizes of the points
-  dt = deldir::deldir(as.data.frame(coordinates))$delsgs[, 5:6]
+  df.deldir = as.data.frame(coordinates)
+  colnames(df.deldir) = c("x", "y")
+  dt = deldir::deldir(df.deldir)$delsgs[, 5:6]
   for (i in seq_row(dt)) {
     adj.mat[dt[i, 1L], dt[i, 2L]] = TRUE
     adj.mat[dt[i, 2L], dt[i, 1L]] = TRUE

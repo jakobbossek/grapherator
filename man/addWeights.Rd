@@ -4,8 +4,14 @@
 \alias{addWeights}
 \title{Add weights to graph.}
 \usage{
-addWeights(graph, generator = NULL, weights = NULL, symmetric = TRUE,
-  to.int = FALSE, ...)
+addWeights(
+  graph,
+  generator = NULL,
+  weights = NULL,
+  symmetric = TRUE,
+  to.int = FALSE,
+  ...
+)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -90,7 +96,9 @@ plot(g3)$pl.weights
 }
 }
 \seealso{
-Other graph generators: \code{\link{addEdges}},
-  \code{\link{addNodes}}, \code{\link{graph}}
+Other graph generators: 
+\code{\link{addEdges}()},
+\code{\link{addNodes}()},
+\code{\link{graph}()}
 }
 \concept{graph generators}

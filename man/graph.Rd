@@ -56,7 +56,9 @@ do.call(gridExtra::grid.arrange, plot(g, show.edges = FALSE))
 }
 }
 \seealso{
-Other graph generators: \code{\link{addEdges}},
-  \code{\link{addNodes}}, \code{\link{addWeights}}
+Other graph generators: 
+\code{\link{addEdges}()},
+\code{\link{addNodes}()},
+\code{\link{addWeights}()}
 }
 \concept{graph generators}

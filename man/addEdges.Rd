@@ -4,8 +4,7 @@
 \alias{addEdges}
 \title{Add edges to graph.}
 \usage{
-addEdges(graph, generator, type = "all", k = NULL,
-  cluster.ids = NULL, ...)
+addEdges(graph, generator, type = "all", k = NULL, cluster.ids = NULL, ...)
 }
 \arguments{
 \item{graph}{[\code{\link{grapherator}}]\cr
@@ -69,7 +68,9 @@ In Proceedings of the 3rd Annual Conference on Genetic and Evolutionary
 Computation, 424-31. GECCO'01. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc.
 }
 \seealso{
-Other graph generators: \code{\link{addNodes}},
-  \code{\link{addWeights}}, \code{\link{graph}}
+Other graph generators: 
+\code{\link{addNodes}()},
+\code{\link{addWeights}()},
+\code{\link{graph}()}
 }
 \concept{graph generators}
